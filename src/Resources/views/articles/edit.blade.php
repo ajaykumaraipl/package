@@ -78,7 +78,7 @@
                                     <div class="form-group col-xs-12">
                                         <label>Image</label>
                                         <input type="file" name="image" value="{!! $singleNews->image !!}" class="@error('image') is-invalid @enderror form-control">
-                                        <img src={!! url("$singleNews->image") !!} height="100" width="100"/>
+                                        <img src={!! url("uploads/package/img/thumbnail/$singleNews->image") !!} height="100" width="100"/>
                                         @error('image')
                                             <div class="error"  style="color:red">{{ $message }}</div>
                                         @enderror
