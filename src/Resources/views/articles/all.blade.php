@@ -26,47 +26,6 @@
             </div>
         </nav>
     </section>
-    <section class="section">
-        @foreach ($allNews as $news)
-            <article class="entry card post-list">
-                <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(img/content/list/list_post_6.jpg)">
-                    <a href="single-post.html" class="thumb-url"></a>
-                        <img src="{!! url("$news->image") !!}" alt="" class="entry__img d-none">
-                    <a href="tags" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--cyan">
-                        @php
-                            $tagName = '';
-                            foreach ($tags as $key => $tag) {
-                                if ($tag->id == $news->tag){
-                                    $tagName = $tag->name;
-                                }
-                            }    
-                        @endphp
-                        {!! $tagName !!}
-                    </a>
-                </div>
-        
-                <div class="entry__body post-list__body card__body">
-                    <div class="entry__header">
-                        <h2 class="entry__title">
-                            <a href="#">{!! $news->title ?: '<font style="color:red"> No Data</font>'!!}</a>
-                        </h2>
-                        <ul class="entry__meta">
-                            <li class="entry__meta-author">
-                                <span>From</span>
-                                <a href="categories">{!! $news->category_name !!}</a>
-                            </li>
-                            <li class="entry__meta-date">
-                                {!! $news->date ?: '<font style="color:red"> No Data</font>' !!}
-                            </li>
-                        </ul>
-                    </div>        
-                    <div class="entry__excerpt">
-                        <p>{!! $news->content ?: '<font style="color:red"> No Data</font>' !!}</p>
-                    </div>
-                </div>
-            </article>
-        @endforeach
-    </section>
     <section class="content">
         <!-- Default box -->
         <div class="row">

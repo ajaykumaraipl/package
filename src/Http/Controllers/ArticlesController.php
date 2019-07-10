@@ -10,7 +10,7 @@ use Admin\Frontend\Models\Tags;
 use Admin\Frontend\Models\ArticlesTag;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\ImageManager as Image;
+use Intervention\Image\Facades\Image;
 
 class ArticlesController extends BaseController
 {
@@ -39,7 +39,7 @@ class ArticlesController extends BaseController
             "slug" => "required",
             "content" => "required",
             "status" => "required",
-            "image" => "required|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "image" => "required|image|mimes:jpeg,png,jpg,gif",
             "date" => "required",
             "tags" => "required"
         ]);
@@ -51,14 +51,19 @@ class ArticlesController extends BaseController
         $image = Request::file('image');
         $newName = rand()."_".$image->getClientOriginalName();
         $basePath = public_path('uploads/package/img');
+        $thumbnail = public_path('uploads/package/img/thumbnail');
+        $cover = public_path('uploads/package/img/cover');
         if (!File::exists($basePath)) {
             File::makeDirectory($basePath, $mode = 0777, true, true);
+            File::makeDirectory($thumbnail, $mode = 0777, true, true);
+            File::makeDirectory($cover, $mode = 0777, true, true);
         }
 
         $image->move($basePath, $newName);
 
-        $img = Image::make($basePath."/".$newName)->resize(320, 240)->insert(public_path('watermark.png'));
-        dd($img);
+        Image::make($basePath."/".$newName)->save($basePath."/".$newName);
+        Image::make($basePath."/".$newName)->resize(320, 240)->save($thumbnail."/".$newName);
+        Image::make($basePath."/".$newName)->resize(820, 312)->save($cover."/".$newName);
 
         $submittedData = array(
             'category_id' => $request['category_id'],
