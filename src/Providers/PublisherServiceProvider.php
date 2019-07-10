@@ -31,6 +31,9 @@ class PublisherServiceProvider extends ServiceProvider
                 include __DIR__.'/../Route/web.php';
             }
         );
+
+        // register migrations
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     protected function mapWebRoutes()
