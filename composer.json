@@ -1,0 +1,32 @@
+{
+    "name": "ajaykumaraipl/package",
+    "description": "News package for laravel.",
+    "keywords": ["laarvel", "News"],
+    "license": "MIT",
+    "type": "laravel-package",
+    "authors": [
+        {
+            "name": "laravel",
+            "email": "ajaykum.aipl@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "illuminate/support": "~5",
+        "intervention/image": "dev-master"
+    },
+    "autoload": {
+        "classmap": [],
+        "psr-4": {
+            "Admin\\Frontend\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Admin\\Frontend\\Providers\\NewsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
