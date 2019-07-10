@@ -1,5 +1,6 @@
 {
     "name": "ajaykumaraipl/package",
+    "version": "1.0",
     "description": "News package for laravel.",
     "keywords": ["laarvel", "News"],
     "license": "MIT",
