@@ -11,6 +11,20 @@
 </head>
 
 <body>
+    <section class="section">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url('/news') }}">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ url('/news') }}">News</a></li>
+                    <li><a href="{{ url('/categories') }}">Categories</a></li>
+                    <li><a href="{{ url('/tags') }}">Tags</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
     <section class="content">
         <!-- Default box -->
         <div class="row">

@@ -9,6 +9,20 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <section class="section">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ url('/news') }}">WebSiteName</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ url('/news') }}">News</a></li>
+                        <li><a href="{{ url('/categories') }}">Categories</a></li>
+                        <li><a href="{{ url('/tags') }}">Tags</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
         <section class="content">
             <a href="{{ url('/categories') }}" class="hidden-print"><i class="fa fa-angle-double-left"></i> Back to all <span>categories</span></a>
             <div class="row m-t-20">

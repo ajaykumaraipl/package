@@ -13,6 +13,20 @@
 
 <body>
     <section class="section">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url('/news') }}">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ url('/news') }}">News</a></li>
+                    <li><a href="{{ url('/categories') }}">Categories</a></li>
+                    <li><a href="{{ url('/tags') }}">Tags</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <section class="section">
         @foreach ($allNews as $news)
             <article class="entry card post-list">
                 <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(img/content/list/list_post_6.jpg)">
