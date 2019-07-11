@@ -19,8 +19,8 @@ class ArticlesTag extends Model
      */
     public static function articlesTag($request)
     {
-        $articlesTag = new ArticlesTag;
-        if ($articlesTag->save()) {
+        $articlesTag = new ArticlesTag($request);
+        if ($articlesTag->save($request)) {
             return true;
         } else {
             return false;
@@ -36,7 +36,7 @@ class ArticlesTag extends Model
      */
     public static function udateArticlesTag($request, $id)
     {
-        $articlesTag = new ArticlesTag;
+        $articlesTag = new ArticlesTag($request);
         if ($articlesTag->where('article_id', $id)->update($request)) {
             return true;
         } else {

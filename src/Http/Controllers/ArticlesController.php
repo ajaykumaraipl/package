@@ -211,8 +211,8 @@ class ArticlesController extends BaseController
         File::delete('uploads/package/img/thumbnail/'.$singleArticles->image);
         File::delete('uploads/package/img/cover/'.$singleArticles->image);
         $articles = Articles::deleteArticles($id);
-        $articles = ArticlesTag::deleteArticlesTag($id);
-        if ($articles) {
+        $ArticlesTag = ArticlesTag::deleteArticlesTag($id);
+        if ($articles || $ArticlesTag) {
             return redirect()->back();
         } else {
             return view('view::articles.404');
