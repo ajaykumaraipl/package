@@ -1,107 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-    <section class="section">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ url('/news') }}">WebSiteName</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ url('/news') }}">News</a></li>
-                    <li><a href="{{ url('/categories') }}">Categories</a></li>
-                    <li><a href="{{ url('/tags') }}">Tags</a></li>
-                </ul>
-            </div>
-        </nav>
-    </section>
-    <section class="content">
-        <!-- Default box -->
-        <div class="row">
-            <!-- THE ACTUAL CONTENT -->
-            <div class="col-md-12">
-                <div class="">
-                    <div class="row m-b-10">
-                    <div class="row m-b-10">
-                        <div class="col-xs-6">
-                            <div class="hidden-print with-border">
-                                <a href="{{ url('/categories/create') }}"
-                                    class="btn btn-primary ladda-button" data-style="zoom-in">
-                                    <span class="ladda-label">
-                                        <i class="fa fa-plus"></i>Add category
-                                    </span>
-                                </a>
-                            </div>
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
+    </head>
+    <body>
+        <section class="section">
+                <!--Navbar -->
+                    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+                        <a class="navbar-brand" href="#">Navbar</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+                        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ url('/news') }}">News</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/tags') }}">Tags</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="overflow-hidden">
-                        <div id="crudTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="crudTable"
-                                        class="box table table-striped table-hover display responsive nowrap m-t-0 dataTable dtr-inline"
-                                        cellspacing="0" aria-describedby="crudTable_info" role="grid">
-                                        <thead>
-                                            <tr role="row">
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            @foreach ($allCategories as $category)
-                                                <tr role="row" class="odd">
-                                                    <td tabindex="0">
-                                                        <span data-order="2019-06-21 00:00:00">
-                                                                {!! $category->name ?: '<font style="color:red"> No Data</font>' !!}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <span>{!! $category->description ?: '<font style="color:red"> No Data</font>' !!}</span>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Single edit button -->
-                                                        <a href={{ url("/categories/edit/$category->id") }}
-                                                            class="btn btn-xs btn-default">
-                                                            <span class="glyphicon glyphicon-edit"></span>
-                                                            Edit
-                                                        </a>
-                                                        <a href={{ url("/categories/delete/$category->id") }} class="btn btn-xs btn-default" data-button-type="delete">
-                                                            <span class="glyphicon glyphicon-trash"></span>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                    </nav>
+                <!--/.Navbar -->
+        </section>
+        <section class="content">
+                <!-- Default box -->
+                <div class="row">
+                    <!-- THE ACTUAL CONTENT -->
+                    <div class="col-md-12">
+                        <div class="row m-b-10">
+                            <div class="row m-b-10">
+                                <div class="col-xs-6">
+                                    <div class="hidden-print with-border" style="margin-left: 40px;">
+                                        <a href={{ url("/categories/create") }}
+                                            class="btn btn-default ladda-button" data-style="zoom-in">
+                                            <span class="ladda-label">
+                                                <i class="fas fa-plus"></i> Add category
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-        </div>
-    </section>
-    {{-- @dd($allNews); --}}
-</body>
+                        <div class="overflow-hidden">
+                            <div id="crudTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row" style="margin: 0 auto;">
+                                    <div class="col-sm-12">
+                                            <table class="table table-striped table-hover table-responsive">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
 
+                                            <tbody>
+                                                @foreach ($allCategories as $category)
+                                                    <tr role="row" class="odd">
+                                                        <td tabindex="0">
+                                                            <span data-order="2019-06-21 00:00:00">
+                                                                    {!! $category->name ?: '<font style="color:red"> No Data</font>' !!}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{!! $category->description ?: '<font style="color:red"> No Data</font>' !!}</span>
+                                                        </td>
+                                                        <td>
+                                                            <!-- Single edit button -->
+                                                            <a href={{ url("/categories/edit/$category->id") }}
+                                                                class="btn btn-sm btn-outline-default waves-effect">
+                                                                <i class="far fa-edit"></i>
+                                                                Edit
+                                                            </a>
+                                                            <a href={{ url("/categories/delete/$category->id") }} 
+                                                                class="btn btn-sm btn-outline-danger waves-effect">
+                                                                <i class="far fa-trash-alt"></i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+        </section>
+    </body>
 </html>

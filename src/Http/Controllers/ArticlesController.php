@@ -14,6 +14,12 @@ use Intervention\Image\Facades\Image;
 
 class ArticlesController extends BaseController
 {
+    /**
+     * Index function
+     * To fetch all articles with connected categoeries and tag id and pass to the view
+     *
+     * @return array
+     */
     public function index()
     {
         $articles = Articles::getAllArticles();
@@ -21,6 +27,12 @@ class ArticlesController extends BaseController
         return view('view::articles.all', ['allNews' => $articles, "tags" => $tags]);
     }
 
+    /**
+     * Create function
+     * To load the view only for create article
+     *
+     * @return void view
+     */
     public function create()
     {
         $categories = Categories::getAllCategories();
@@ -28,6 +40,13 @@ class ArticlesController extends BaseController
         return view('view::articles.create', [ "categories" => $categories, "tags" => $tags]);
     }
     
+    /**
+     * Save function
+     * To save article and related categories and tags and image(actual, cover, thumbnail)
+     *
+     * @param Request $request
+     * @return void
+     */
     public function save(Request $request)
     {
         $request = Request::all();
@@ -76,10 +95,10 @@ class ArticlesController extends BaseController
         );
         $lastInsertedId = Articles::storArticle($submittedData);
         
-        $tags = new ArticlesTag(array(
+        $tags = array(
             'article_id' => $lastInsertedId,
             'tag_id' => $request['tags']
-        ));
+        );
         
         $result = ArticlesTag::articlesTag($tags);
         
@@ -90,6 +109,13 @@ class ArticlesController extends BaseController
         }
     }
     
+    /**
+     * Edit function
+     * To load the view only for edit article
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function edit($id)
     {
         $singleArticles = Articles::getSingleArticles($id);
@@ -98,6 +124,14 @@ class ArticlesController extends BaseController
         return view('view::articles.edit', ['singleNews' => $singleArticles, "categories" => $categories, "tags" => $tags]);
     }
     
+    /**
+     * Update function
+     * To update the article and related categories and tags and image(actual, cover, thumbnail)
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
         $request = Request::all();
@@ -112,24 +146,32 @@ class ArticlesController extends BaseController
             "image" => "required",
             "date" => "required",
             "tags" => "required"
-            ]);
-            
-            if ($validator->fails()) {
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
-            
-            $image = Request::file('image');
-            $newName = rand().'_'.$image->getClientOriginalName();
-            $basePath = public_path('uploads/package/img');
-            if (!File::exists($basePath)) {
-                File::makeDirectory($basePath, $mode = 0777, true, true);
-            }
-            
-            $image->move($basePath, $newName);
-            
-            $singleArticles = Articles::getSingleArticles($id);
-            $singleArticles = array(
-                'category_id' => $request['category_id'] ?: $singleArticles['category_id'],
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $singleArticles = Articles::getSingleArticles($id);
+        
+        $image = Request::file('image');
+        $newName = $singleArticles['image'];
+        $basePath = public_path('uploads/package/img');
+        $thumbnail = public_path('uploads/package/img/thumbnail');
+        $cover = public_path('uploads/package/img/cover');
+        if (!File::exists($basePath)) {
+            File::makeDirectory($basePath, $mode = 0777, true, true);
+            File::makeDirectory($thumbnail, $mode = 0777, true, true);
+            File::makeDirectory($cover, $mode = 0777, true, true);
+        }
+        
+        $image->move($basePath, $newName);
+        Image::make($basePath."/".$newName)->save($basePath."/".$newName);
+        Image::make($basePath."/".$newName)->resize(320, 240)->save($thumbnail."/".$newName);
+        Image::make($basePath."/".$newName)->resize(820, 312)->save($cover."/".$newName);
+
+        $singleArticles = array(
+            'category_id' => $request['category_id'] ?: $singleArticles['category_id'],
             'title' => $request['title'] ?: $singleArticles['title'],
             'slug' => $request['slug'] ?: $singleArticles['slug'],
             'content' => $request['content'] ?: $singleArticles['content'],
@@ -141,12 +183,12 @@ class ArticlesController extends BaseController
         $result = Articles::updateArticle($singleArticles, $id);
         
         if ($result) {
-            $tags = new ArticlesTag(array(
+            $tags = array(
                 'article_id' => $id,
                 'tag_id' => $request['tags']
-            ));
+            );
             
-            $result = ArticlesTag::articlesTag($tags);
+            $result = ArticlesTag::udateArticlesTag($tags, $id);
             if ($result) {
                 return redirect('/news');
             }
@@ -155,6 +197,13 @@ class ArticlesController extends BaseController
         return view('view::articles.404');
     }
     
+    /**
+     * Delete function
+     * To delete the article and related categories and tags and image(actual, cover, thumbnail)
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function delete($id)
     {
         $singleArticles = Articles::getSingleArticles($id);

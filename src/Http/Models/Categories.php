@@ -6,22 +6,43 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categories extends Model
 {
+    // Define the table name
     protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'description'];
     
+    /**
+     * getAllCategories function
+     * To fetch all the categories from the database
+     *
+     * @return void
+     */
     public static function getAllCategories()
     {
         $categories = new Categories;
         return $categories->get();
     }
     
+    /**
+     * getSingleCategory function
+     * To fetch single categories from database according to the id
+     *
+     * @param [type] $id
+     * @return void
+     */
     public static function getSingleCategory($id)
     {
         $categories = new Categories;
         return $categories->find($id);
     }
     
+    /**
+     * deleteCategory function
+     * To delete single categories from database according to the id
+     *
+     * @param [type] $id
+     * @return void
+     */
     public static function deleteCategory($id)
     {
         $categories = new Categories;
@@ -32,6 +53,13 @@ class Categories extends Model
         }
     }
     
+    /**
+     * storCategory function
+     * To save categories to categories table
+     *
+     * @param [type] $data
+     * @return void
+     */
     public static function storCategory($request)
     {
         if ($request->save()) {
@@ -41,6 +69,14 @@ class Categories extends Model
         }
     }
     
+    /**
+     * updateCategory function
+     * To update categories to categories table
+     *
+     * @param [type] $request
+     * @param [type] $id
+     * @return void
+     */
     public static function updateCategory($request, $id)
     {
         $categories = new Categories;

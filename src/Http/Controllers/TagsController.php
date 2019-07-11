@@ -9,23 +9,49 @@ use Illuminate\Support\Facades\Validator;
 
 class TagsController extends BaseController
 {
+    /**
+     * Index function
+     * To fetch all Tags pass to the view
+     *
+     * @return array
+     */
     public function index()
     {
         $tags = Tags::getAllTags();
         return view('view::tags.all', ['tags' => $tags]);
     }
 
+    /**
+     * Create function
+     * To load the view only for create Tags
+     *
+     * @return void view
+     */
     public function create()
     {
         return view('view::tags.create');
     }
 
+    /**
+     * Edit function
+     * To load the view only for edit Tags
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function edit($id)
     {
         $singleTag = Tags::getSingleTag($id);
         return view('view::tags.edit', ['singleTag' => $singleTag]);
     }
 
+    /**
+     * Save function
+     * To save Tags
+     *
+     * @param Request $request
+     * @return void
+     */
     public function save(Request $request)
     {
         $request = Request::all();
@@ -52,6 +78,14 @@ class TagsController extends BaseController
         }
     }
 
+    /**
+     * Update function
+     * To update the Tags
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
         $request = Request::all();
@@ -79,6 +113,13 @@ class TagsController extends BaseController
         }
     }
 
+    /**
+     * Delete function
+     * To delete the Tags
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function delete($id)
     {
         $Tag = Tags::deleteTag($id);

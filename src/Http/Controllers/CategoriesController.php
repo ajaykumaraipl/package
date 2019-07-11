@@ -9,17 +9,36 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends BaseController
 {
+    /**
+     * Index function
+     * To fetch all categoeries pass to the view
+     *
+     * @return array
+     */
     public function index()
     {
         $allCategories = Categories::getAllCategories();
         return view('view::categories.all', ['allCategories' => $allCategories]);
     }
 
+    /**
+     * Create function
+     * To load the view only for create categoeries
+     *
+     * @return void view
+     */
     public function create()
     {
         return view('view::categories.create');
     }
 
+    /**
+     * Save function
+     * To save categoeries
+     *
+     * @param Request $request
+     * @return void
+     */
     public function save(Request $request)
     {
         $request = Request::all();
@@ -46,12 +65,27 @@ class CategoriesController extends BaseController
         }
     }
 
+    /**
+     * Edit function
+     * To load the view only for edit categoeries
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function edit($id)
     {
         $singleCategory = Categories::getSingleCategory($id);
         return view('view::categories.edit', ['singleCategory' => $singleCategory]);
     }
 
+    /**
+     * Update function
+     * To update the categoeries
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
         $request = Request::all();
@@ -80,6 +114,13 @@ class CategoriesController extends BaseController
     }
 
 
+    /**
+     * Delete function
+     * To delete the categoeries
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function delete($id)
     {
         $result = Categories::deleteCategory($id);
