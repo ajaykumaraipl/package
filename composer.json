@@ -7,8 +7,10 @@
     "type": "laravel-package",
     "authors": [
         {
-            "name": "laravel",
-            "email": "ajaykum.aipl@gmail.com"
+            "name": "Ajay Kumar",
+            "email": "ajay.khullar@outlook.com",
+            "homepage": "https://twitter.com/callmekhullar",
+            "role": "Developer"
         }
     ],
     "require": {
