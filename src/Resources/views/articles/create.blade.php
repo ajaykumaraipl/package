@@ -45,7 +45,7 @@
                 <!--/.Navbar -->
         </section>
         <section class="content">
-            <a href="{{ url('/news') }}" class="hidden-print" style="margin-left: 40px;">
+            <a href="{{ url('/news') }}" class="hidden-print text-muted" style="margin-left: 40px;">
                 <i class="fas fa-angle-double-left"></i> Back to all 
                 <span>articles</span>
             </a>
@@ -54,7 +54,7 @@
                     <!-- Default form box -->
                         <form class="text-center border border-light p-5" method="post" action="{{ url('/news/save') }}" enctype="multipart/form-data">
                             @csrf
-                            <p class="h4 mb-4">Create article</p>
+                            <p class="h4 mb-4 text-muted">Create article</p>
                         
                             <!-- Title -->
                             <input type="text" class="@error('title') is-invalid @enderror form-control mb-4" value="{{ old('title') }}" name="title" placeholder="Title">

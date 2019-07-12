@@ -45,7 +45,7 @@
                 <!--/.Navbar -->
         </section>
         <section class="content">
-                <a href="{{ url('/tags') }}" class="hidden-print" style="margin-left: 40px;">
+                <a href="{{ url('/tags') }}" class="hidden-print text-muted" style="margin-left: 40px;">
                     <i class="fas fa-angle-double-left"></i> Back to all 
                     <span>tags</span>
                 </a>
@@ -54,7 +54,7 @@
                     <!-- Default box -->
                     <form class="text-center border border-light p-5" method="post" action="{{ url('/tags/save') }}" enctype="multipart/form-data">
                         @csrf
-                        <p class="h4 mb-4">Create Tag</p>
+                        <p class="h4 mb-4 text-muted">Create Tag</p>
 
                         <!-- Name -->
                         <input type="text" class="@error('name') is-invalid @enderror form-control mb-4" value="{{ old('name') }}" name="name" placeholder="Name">

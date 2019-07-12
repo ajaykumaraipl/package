@@ -47,7 +47,7 @@
         <section class="content">
             <div class="row m-t-20">
                 <div class="col-md-8 col-md-offset-2">
-                        <a href="{{ url('/news') }}" class="hidden-print" style="margin-left: 40px;">
+                        <a href="{{ url('/news') }}" class="hidden-print text-muted" style="margin-left: 40px;">
                             <i class="fas fa-angle-double-left"></i> Back to all 
                             <span>articles</span>
                         </a>
@@ -58,7 +58,7 @@
                 <!-- Default box -->
                     <form class="text-center border border-light p-5" method="post" action="{{ url('/news/edit/'.$singleNews->id) }}" enctype="multipart/form-data">
                         @csrf
-                        <p class="h4 mb-4">Edit article</p>
+                        <p class="h4 mb-4 text-muted">Edit article</p>
                     
                         <!-- Title -->
                         <input type="text" class="@error('title') is-invalid @enderror form-control mb-4" value="{!! $singleNews->title !!}" name="title" placeholder="title">

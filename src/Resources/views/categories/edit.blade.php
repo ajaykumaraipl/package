@@ -45,7 +45,7 @@
                 <!--/.Navbar -->
         </section>
         <section class="content">
-                <a href="{{ url('/categories') }}" class="hidden-print" style="margin-left: 40px;">
+                <a href="{{ url('/categories') }}" class="hidden-print text-muted" style="margin-left: 40px;">
                     <i class="fas fa-angle-double-left"></i> Back to all 
                     <span>categories</span>
                 </a>

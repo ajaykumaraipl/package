@@ -20,30 +20,30 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
     </head>
     <body>
-        <section class="section">
-                <!--Navbar -->
-                    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-                        <a class="navbar-brand" href="#">Navbar</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-                        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ url('/news') }}">News</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/tags') }}">Tags</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                <!--/.Navbar -->
-        </section>
+    <section class="section">
+            <!--Navbar -->
+                <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+                    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ url('/news') }}">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/tags') }}">Tags</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            <!--/.Navbar -->
+    </section>
     <section class="content">
         <!-- Default box -->
         <div class="row">
