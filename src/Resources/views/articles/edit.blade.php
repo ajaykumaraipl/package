@@ -99,7 +99,7 @@
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
-                            <img src={!! url("uploads/package/img/thumbnail/$singleNews->image") !!} height="100" width="100"/>
+                            <img src={!! url("uploads/packages/publications/images/thumbnail/small/$singleNews->image") !!} height="100" width="100"/>
                         </div>
                         @error('image')
                             <div class="error"  style="color:red">{{ $message }}</div>

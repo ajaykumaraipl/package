@@ -69,9 +69,9 @@ class ArticlesController extends BaseController
 
         $image = Request::file('image');
         $newName = rand()."_".$image->getClientOriginalName();
-        $basePath = public_path('uploads/package/img');
-        $thumbnail = public_path('uploads/package/img/thumbnail');
-        $cover = public_path('uploads/package/img/cover');
+        $basePath = public_path('uploads/packages/publications/images/');
+        $thumbnail = public_path('uploads/packages/publications/images/thumbnail/small/');
+        $cover = public_path('uploads/packages/publications/images/cover/');
         if (!File::exists($basePath)) {
             File::makeDirectory($basePath, $mode = 0777, true, true);
             File::makeDirectory($thumbnail, $mode = 0777, true, true);
@@ -79,10 +79,10 @@ class ArticlesController extends BaseController
         }
         
         $image->move($basePath, $newName);
-        
-        Image::make($basePath."/".$newName)->save($basePath."/".$newName);
-        Image::make($basePath."/".$newName)->resize(320, 240)->save($thumbnail."/".$newName);
-        Image::make($basePath."/".$newName)->resize(820, 312)->save($cover."/".$newName);
+        Image::make($basePath.$newName)->save($basePath.$newName);
+        Image::make($basePath.$newName)->resize(320, 240)->save($thumbnail.$newName);
+        Image::make($basePath.$newName)->resize(820, 312)->save($cover.$newName);
+        File::delete($basePath.$newName);
         
         $submittedData = array(
             'category_id' => $request['category_id'],
@@ -166,9 +166,10 @@ class ArticlesController extends BaseController
         }
         
         $image->move($basePath, $newName);
-        Image::make($basePath."/".$newName)->save($basePath."/".$newName);
-        Image::make($basePath."/".$newName)->resize(320, 240)->save($thumbnail."/".$newName);
-        Image::make($basePath."/".$newName)->resize(820, 312)->save($cover."/".$newName);
+        Image::make($basePath.$newName)->save($basePath.$newName);
+        Image::make($basePath.$newName)->resize(320, 240)->save($thumbnail.$newName);
+        Image::make($basePath.$newName)->resize(820, 312)->save($cover.$newName);
+        File::delete($basePath.$newName);
 
         $singleArticles = array(
             'category_id' => $request['category_id'] ?: $singleArticles['category_id'],

@@ -95,7 +95,7 @@
                                                     <span>{!! $news->title ?: '<font style="color:red"> No Data</font>'!!}</span>
                                                 </td>
                                                 <td>
-                                                    <img src={!! url("uploads/package/img/thumbnail/$news->image") !!} style="width:100px"/>
+                                                    <img src={!! url("uploads/packages/publications/images/thumbnail/small/$news->image") !!} style="width:100px"/>
                                                 </td>
                                                 <td>
                                                     <span>{!! $news->category_name !!}</span>
