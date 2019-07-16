@@ -3,7 +3,7 @@
 namespace Admin\Frontend\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Admin\Frontend\Models\Articles;
 use Admin\Frontend\Models\Categories;
 use Admin\Frontend\Models\Tags;
@@ -49,10 +49,8 @@ class ArticlesController extends BaseController
      */
     public function save(Request $request)
     {
-        $request = Request::all();
-        
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "category_id" => "required",
             "title" => "required",
             "slug" => "required",
@@ -62,27 +60,10 @@ class ArticlesController extends BaseController
             "date" => "required",
             "tags" => "required"
         ]);
-        
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-
-        $image = Request::file('image');
-        $newName = rand()."_".$image->getClientOriginalName();
-        $basePath = public_path('uploads/packages/publications/images/');
-        $thumbnail = public_path('uploads/packages/publications/images/thumbnail/small/');
-        $cover = public_path('uploads/packages/publications/images/cover/');
-        if (!File::exists($basePath)) {
-            File::makeDirectory($basePath, $mode = 0777, true, true);
-            File::makeDirectory($thumbnail, $mode = 0777, true, true);
-            File::makeDirectory($cover, $mode = 0777, true, true);
-        }
-        
-        $image->move($basePath, $newName);
-        Image::make($basePath.$newName)->save($basePath.$newName);
-        Image::make($basePath.$newName)->resize(320, 240)->save($thumbnail.$newName);
-        Image::make($basePath.$newName)->resize(820, 312)->save($cover.$newName);
-        File::delete($basePath.$newName);
+            
+        $data = $request->imgdata;
+        $newName = rand()."_".$request->image->getClientOriginalExtension();
+        $this->imageAction($data, $newName);
         
         $submittedData = array(
             'category_id' => $request['category_id'],
@@ -134,42 +115,25 @@ class ArticlesController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $request = Request::all();
-        
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "category_id" => "required",
             "title" => "required",
             "slug" => "required",
             "content" => "required",
             "status" => "required",
-            "image" => "required",
+            "image" => "required|image|mimes:jpeg,png,jpg,gif",
             "date" => "required",
             "tags" => "required"
         ]);
-        
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
 
         $singleArticles = Articles::getSingleArticles($id);
         
-        $image = Request::file('image');
-        $newName = $singleArticles['image'];
-        $basePath = public_path('uploads/package/img');
-        $thumbnail = public_path('uploads/package/img/thumbnail');
-        $cover = public_path('uploads/package/img/cover');
-        if (!File::exists($basePath)) {
-            File::makeDirectory($basePath, $mode = 0777, true, true);
-            File::makeDirectory($thumbnail, $mode = 0777, true, true);
-            File::makeDirectory($cover, $mode = 0777, true, true);
-        }
-        
-        $image->move($basePath, $newName);
-        Image::make($basePath.$newName)->save($basePath.$newName);
-        Image::make($basePath.$newName)->resize(320, 240)->save($thumbnail.$newName);
-        Image::make($basePath.$newName)->resize(820, 312)->save($cover.$newName);
-        File::delete($basePath.$newName);
+        $this->deleteImages($singleArticles->image);
+
+        $data = $request->imgdata;
+        $newName = rand()."_".$request->image->getClientOriginalExtension();
+        $this->imageAction($data, $newName);
 
         $singleArticles = array(
             'category_id' => $request['category_id'] ?: $singleArticles['category_id'],
@@ -208,9 +172,10 @@ class ArticlesController extends BaseController
     public function delete($id)
     {
         $singleArticles = Articles::getSingleArticles($id);
-        File::delete('uploads/package/img/'.$singleArticles->image);
-        File::delete('uploads/package/img/thumbnail/'.$singleArticles->image);
-        File::delete('uploads/package/img/cover/'.$singleArticles->image);
+        File::delete('uploads/packages/publications/images/thumbnail/small/'.$singleArticles->image);
+        File::delete('uploads/packages/publications/images/thumbnail/medium/'.$singleArticles->image);
+        File::delete('uploads/packages/publications/images/thumbnail/large/'.$singleArticles->image);
+        File::delete('uploads/packages/publications/images//cover/'.$singleArticles->image);
         $articles = Articles::deleteArticles($id);
         $ArticlesTag = ArticlesTag::deleteArticlesTag($id);
         if ($articles || $ArticlesTag) {
@@ -218,5 +183,64 @@ class ArticlesController extends BaseController
         } else {
             return view('view::articles.404');
         }
+    }
+
+    /**
+     * ImageAction fucntion
+     * To create folders and upload images in those folders
+     *
+     * @param [type] $imgBlob
+     * @param [type] $articleImg
+     * @return void
+     */
+    public function imageAction($imgBlob, $articleImg)
+    {
+        $data = $imgBlob;
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+        $basePath = 'uploads/packages/publications/images/';
+        if (!File::exists($basePath)) {
+            File::makeDirectory($basePath, $mode = 0777, true, true);
+        }
+        file_put_contents($basePath.$articleImg, $data);
+
+        $imageFoldersPath = array(
+                    '300_160'    =>  'uploads/packages/publications/images/thumbnail/small/',
+                    '460_320'   =>  'uploads/packages/publications/images/thumbnail/medium/',
+                    '600_320'    =>  'uploads/packages/publications/images/thumbnail/large/',
+                    '1900_350'             =>  'uploads/packages/publications/images/cover/'
+        );
+        foreach ($imageFoldersPath as $dimentions => $path) {
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            $dimention = explode('_', $dimentions);
+            Image::make($basePath.$articleImg)->resize($dimention[0], $dimention[1])->save($path.$articleImg);
+        }
+        return File::delete($basePath.$articleImg);
+    }
+
+    /**
+     * deleteImages function
+     * To delete images from all the folders
+     *
+     * @param [type] $imageName
+     * @return void
+     */
+    public function deleteImages($imageName)
+    {
+        $imageFoldersPath = array(
+            '300_160'    =>  'uploads/packages/publications/images/thumbnail/small/',
+            '460_320'   =>  'uploads/packages/publications/images/thumbnail/medium/',
+            '600_320'    =>  'uploads/packages/publications/images/thumbnail/large/',
+            '1900_350'             =>  'uploads/packages/publications/images/cover/'
+        );
+        foreach ($imageFoldersPath as $path) {
+            if (!File::exists($path)) {
+                File::delete($path.$imageName);
+            }
+        }
+        return true;
     }
 }

@@ -10,14 +10,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet">
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
+        
+        <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
     </head>
     <body>
         <section class="section">
@@ -88,19 +82,20 @@
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
                         
-                        <div class="form-group text-left">
+                        <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="@error('image') is-invalid @enderror custom-file-input" id="inputGroupFile01"
-                                    aria-describedby="inputGroupFileAddon01" name="image" value="{!! $singleNews->image !!}">
+                                    <input type="file" class="@error('image') is-invalid @enderror custom-file-input" id="image" name="image">
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
-                            <img src={!! url("uploads/packages/publications/images/thumbnail/small/$singleNews->image") !!} height="100" width="100"/>
                         </div>
+                        <img src="{{ url('uploads/packages/publications/images/thumbnail/small/'.$singleNews->image)}}" />
+                        <input type="hidden" id="img-data" name="imgdata"/>
+                        <div class="col-sm" id="result-wrapper"></div>
                         @error('image')
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
@@ -149,6 +144,55 @@
                 </div>
             </div>
         </section>
-        {{-- @dd($singleNews); --}}
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
+        
+        <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.5.1/croppie.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#result-wrapper").hide();
+
+                $("#image").change(function(e) {
+                    $("#result-wrapper").html('');
+                    readURL(this);
+                });
+
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var resize = new Croppie($('#result-wrapper')[0], {
+                                // enableResize: true,
+                                viewport: {width: 300,height: 160},
+                                boundary: {width: 300,height: 300},
+                                showZoomer: false,
+                                enableOrientation: true,
+                                url: e.target.result
+                            });
+                            console.log($('#result-wrapper'));
+                            console.log(resize);
+                            $("#result-wrapper").on('mouseleave', function(){
+                                resize.result('base64').then(function(dataImg) {
+                                    // console.log(dataImg);
+                                    let issetImage = $("#upload").val();
+                                    if(issetImage !== ''){
+                                        $("#img-data").val(dataImg);
+                                    }
+                                });
+                            });
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                        $("#result-wrapper").show('slow');
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
