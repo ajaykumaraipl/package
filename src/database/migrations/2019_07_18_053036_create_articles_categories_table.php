@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleCategoriesTable extends Migration
+class CreateArticlesCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,6 @@ class CreateArticleCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('article_tag');
+        Schema::drop('articles_categories');
     }
 }
