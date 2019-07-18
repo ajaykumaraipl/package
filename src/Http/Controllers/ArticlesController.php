@@ -4,13 +4,16 @@ namespace Admin\Frontend\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Admin\Frontend\Models\Articles;
-use Admin\Frontend\Models\Categories;
-use Admin\Frontend\Models\Tags;
-use Admin\Frontend\Models\ArticlesTag;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\File;
+
+// Facades
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
+// Models
+use Admin\Frontend\Models\ArticlesTag;
+use Admin\Frontend\Models\Categories;
+use Admin\Frontend\Models\Articles;
+use Admin\Frontend\Models\Tags;
 
 class ArticlesController extends BaseController
 {

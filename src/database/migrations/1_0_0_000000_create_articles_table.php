@@ -13,7 +13,8 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->increments('id');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
             $table->integer('reseller_id');
             $table->string('title');
             $table->text('content');

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->bigIncrements('id');
             $table->integer('reseller_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->string('updated_by');
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +33,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tags');
+        Schema::drop('categories');
     }
 }
