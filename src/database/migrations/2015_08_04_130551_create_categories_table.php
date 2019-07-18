@@ -14,8 +14,12 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('reseller_id');
             $table->string('name');
             $table->text('description');
+            $table->string('image')->nullable();
+            $table->integer('parent_id');
+            $table->string('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });

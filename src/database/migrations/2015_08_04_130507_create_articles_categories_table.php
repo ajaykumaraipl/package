@@ -12,10 +12,11 @@ class CreateArticleTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
+        Schema::create('articles_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('article_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->integer('articles_id')->unsigned();
+            $table->integer('tags_id')->unsigned();
+            $table->string('updated_by');
             $table->nullableTimestamps();
             $table->softDeletes();
         });
