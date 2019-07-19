@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 //Models
-use Package\Publication\ArticlesCategories;
-use Package\Publication\ArticlesTags;
-use Package\Publication\Categories;
-use Package\Publication\Articles;
-use Package\Publication\Tags;
+use Package\Publication\Models\ArticlesCategories;
+use Package\Publication\Models\ArticlesTags;
+use Package\Publication\Models\Categories;
+use Package\Publication\Models\Articles;
+use Package\Publication\Models\Tags;
 
 class ArticlesController extends BaseController
 {

@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 //Models
-use Package\Publication\Tags;
+use Package\Publication\Models\Tags;
 
 class TagsController extends BaseController
 {

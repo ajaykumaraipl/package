@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 //Models
-use Package\Publication\Categories;
+use Package\Publication\Models\Categories;
 
 class CategoriesController extends BaseController
 {
