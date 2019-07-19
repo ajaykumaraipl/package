@@ -18,6 +18,19 @@ use Package\Publication\Models\Tags;
 
 class ArticlesController extends BaseController
 {
+
+    private $imageFoldersPath;
+
+    public function __construct()
+    {
+        $this->imageFoldersPath = array(
+            '300_160'   =>  public_path('uploads/packages/publications/images/thumbnail/small/'),
+            '460_320'   =>  public_path('uploads/packages/publications/images/thumbnail/medium/'),
+            '600_320'   =>  public_path('uploads/packages/publications/images/thumbnail/large/'),
+            '1900_350'  =>  public_path('uploads/packages/publications/images/cover/')
+        );
+    }
+
     /**
      * Index function
      * To fetch all articles with connected categoeries and tag id and pass to the view
@@ -242,19 +255,13 @@ class ArticlesController extends BaseController
         list($type, $data) = explode(';', $data);
         list(, $data)      = explode(',', $data);
         $data = base64_decode($data);
-        $basePath = 'uploads/packages/publications/images/';
+        $basePath = public_path('uploads/packages/publications/images');
         if (!File::exists($basePath)) {
             File::makeDirectory($basePath, $mode = 0777, true, true);
         }
         file_put_contents($basePath.$articleImg, $data);
 
-        $imageFoldersPath = array(
-                    '300_160'    =>  'uploads/packages/publications/images/thumbnail/small/',
-                    '460_320'   =>  'uploads/packages/publications/images/thumbnail/medium/',
-                    '600_320'    =>  'uploads/packages/publications/images/thumbnail/large/',
-                    '1900_350'             =>  'uploads/packages/publications/images/cover/'
-        );
-        foreach ($imageFoldersPath as $dimentions => $path) {
+        foreach ($this->imageFoldersPath as $dimentions => $path) {
             if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
@@ -274,14 +281,7 @@ class ArticlesController extends BaseController
      */
     public function copyImage($from, $to)
     {
-        $imageFoldersPath = array(
-            'uploads/packages/publications/images/thumbnail/small/',
-            'uploads/packages/publications/images/thumbnail/medium/',
-            'uploads/packages/publications/images/thumbnail/large/',
-            'uploads/packages/publications/images/cover/'
-        );
-
-        foreach ($imageFoldersPath as $path) {
+        foreach ($this->imageFoldersPath as $path) {
             if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
@@ -298,13 +298,7 @@ class ArticlesController extends BaseController
      */
     public function deleteImages($imageName)
     {
-        $imageFoldersPath = array(
-            '300_160'    =>  'uploads/packages/publications/images/thumbnail/small/',
-            '460_320'   =>  'uploads/packages/publications/images/thumbnail/medium/',
-            '600_320'    =>  'uploads/packages/publications/images/thumbnail/large/',
-            '1900_350'             =>  'uploads/packages/publications/images/cover/'
-        );
-        foreach ($imageFoldersPath as $path) {
+        foreach ($this->imageFoldersPath as $path) {
             if (File::exists($path)) {
                 File::delete($path.$imageName);
             }
