@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Package\Publication\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 //Models
-use App\Models\ArticlesCategories;
-use App\Models\ArticlesTags;
-use App\Models\Categories;
-use App\Models\Articles;
-use App\Models\Tags;
+use Package\Publication\ArticlesCategories;
+use Package\Publication\ArticlesTags;
+use Package\Publication\Categories;
+use Package\Publication\Articles;
+use Package\Publication\Tags;
 
 class ArticlesController extends BaseController
 {

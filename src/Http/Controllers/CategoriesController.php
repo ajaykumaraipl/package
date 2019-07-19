@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Package\Publication\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 //Models
-use App\Models\Categories;
+use Package\Publication\Categories;
 
 class CategoriesController extends BaseController
 {

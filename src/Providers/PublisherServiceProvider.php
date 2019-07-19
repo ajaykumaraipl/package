@@ -26,7 +26,7 @@ class PublisherServiceProvider extends ServiceProvider
     {
         // register controller
         $this->app->router->group(
-            ['namespace' => 'Admin\Frontend\Controllers'],
+            ['namespace' => 'Package\Publication\Controllers'],
             function () {
                 include __DIR__.'/../Route/web.php';
             }
