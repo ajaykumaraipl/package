@@ -21,7 +21,7 @@
     "autoload": {
         "classmap": [],
         "psr-4": {
-            "Admin\\Frontend\\": "src/"
+            "Package\\Publication\\": "src/"
         }
     },
     "extra": {
