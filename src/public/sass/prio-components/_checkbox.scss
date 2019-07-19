@@ -1,0 +1,24 @@
+#prio{
+    .prio-checkbox { 
+        [type="checkbox"].filled-in:not(:checked) + span:not(.lever):after { border: 1px solid $body3Color; height: 24px; width: 24px; border-radius: 4px; }
+        [type="checkbox"].filled-in:checked + span:not(.lever):after { width: 24px; height: 24px; border-radius: 4px; border-radius: 4px; border-color: $primaryColor; background-color: $primaryColor;}
+        [type="checkbox"].filled-in:checked + span:not(.lever):before { top: 0; left: 2px; width: 9px; height: 15px;}
+         [type="checkbox"].filled-in:disabled:not(:checked) + span:not(.lever)::after { background-color: transparent; border: 1px solid $body2Color;}
+             [type="checkbox"].filled-in:disabled:not(:checked) + span:not(.lever)::before { display: none;}
+        &.small{
+            [type="checkbox"].filled-in:not(:checked) + span:not(.lever):after { height: 16px; width: 16px; border-radius: 4px; top: 5px; }
+            [type="checkbox"].filled-in:checked + span:not(.lever):after { width: 16px; height: 16px; border-radius: 4px; top: 5px;}
+            [type="checkbox"].filled-in:checked + span:not(.lever):before { top: -1px; left: 1px; width: 7px; height: 10px; top: 4px;}
+        }
+        &.prio-rounded{
+            [type="checkbox"].filled-in:not(:checked) + span:not(.lever):after { border-radius: 50%;}
+             [type="checkbox"].filled-in:checked + span:not(.lever):after  { border-radius: 50%;}
+             [type="checkbox"].filled-in:not(:checked) + span:not(.lever):before { top: 1px;left: 2px; width: 9px; height: 14px; border-top: 2px solid transparent; border-left: 2px solid transparent; border-right: 2px solid $body3Color; border-bottom: 2px solid $body3Color; }
+             [type="checkbox"].filled-in:disabled:not(:checked) + span:not(.lever)::after { background-color: transparent; border: 1px solid $body2Color;}
+             [type="checkbox"].filled-in:disabled:not(:checked) + span:not(.lever)::before { display: none;}
+        }
+        &.prio-disabled {
+            span { color: $body2Color;}
+        }
+    }
+}

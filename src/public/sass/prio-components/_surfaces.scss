@@ -1,0 +1,6 @@
+.prio-shadow { width: 160px;  }
+        .prio-shadow-box  {padding: 80px; display: block; margin-bottom: 16px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.16); position: relative;
+                           &.small { box-shadow: 0 3px 10px rgba(0, 0, 0, .16); }
+                           &.large { box-shadow: 0 0 15px rgba(0, 0, 0, 0.16);}
+                           &.extra-large { box-shadow: 0 7px 30px rgba(0, 0, 0, 0.16); border-radius: 10px;}
+        }

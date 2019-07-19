@@ -1,0 +1,72 @@
+/*
+1. Typography
+2. Page Layout
+3. Media Query Ranges
+4. colors
+
+
+
+*/
+/********************************** 1. Typography********************/
+/********************************** /Typography********************/
+/********************************** 2. Page Layout********************/
+/********************************** /Page Layout********************/
+/********************************** 3. Media Query Ranges********************/
+/********************************** /Media Query Ranges********************/
+/********************************** 4. colors********************/
+/********************************** /colors********************/
+/*
+
+(1) POSITIONS-MIXINS
+(2) SHADOW-BOX
+(3) BORDERS
+(4) FLEX
+(5) OVERLAY
+
+*/
+/********(1) POSITIONS-MIXINS***********/
+/******** /POSITIONS-MIXINS***********/
+/********(2) SHADOW-BOX***********/
+/******** /SHADOW-BOX***********/
+/********(3) BORDERS***********/
+/******** /BORDERS***********/
+/********(4) FLEX***********/
+/******** /FLEX***********/
+/********(5) OVERLAY***********/
+/******** /OVERLAY***********/
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid { max-width: 1398px; margin: 0 70px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box { padding: 48px 63px; max-width: 100%; width: 100%; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-checkout-header .prio-extra-option-switch { margin-bottom: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-checkout-header h6 { margin-bottom: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-checkout-box-section { margin-top: 48px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box h4 { margin: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box h6 { font-size: 16px; font-family: Robotomedium; margin: 0 0 16px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-payment-method-section .prio-payment-method-listing { margin: 0 -8px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-payment-method-section .prio-payment-method-listing a { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; max-width: 160px; height: 48px; width: 100%; border: 1px solid #dbdbdb; margin: 0 8px; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; border-radius: 5px; font-size: 14px; color: #202124; margin-bottom: 10px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-payment-method-section .prio-payment-method-listing a.active, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-payment-method-section .prio-payment-method-listing a:hover { background-color: #1BB7C2; color: #fff; border-color: #1BB7C2; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-guest-details h6, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-booking-details h6, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets h6, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-partner-details h6 { margin-bottom: 30px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-guest-details .prio-gray-input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-guest-details .prio-gray-select, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-booking-details .prio-gray-input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-booking-details .prio-gray-select, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-gray-input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-gray-select, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-partner-details .prio-gray-input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-partner-details .prio-gray-select { margin-bottom: 38px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-guest-details .prio-gray-input.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-guest-details .prio-gray-select.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-booking-details .prio-gray-input.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-booking-details .prio-gray-select.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-gray-input.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-gray-select.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-partner-details .prio-gray-input.prio-width-auto input, #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-partner-details .prio-gray-select.prio-width-auto input { max-width: 160px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-receive-tickets-checkboxes { margin-bottom: 24px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-receive-tickets-checkboxes label span { color: #202124; font-size: 16px; font-family: RobotoRegular, sans-serif; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-receive-tickets-checkboxes label span i { color: #BCBCBC; font-size: 24px; margin: 0 13px 0 10px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box .prio-receive-tickets .prio-gray-input { margin-top: 40px; margin-left: 35px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box-parent { padding-left: 0; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box { padding: 0; max-width: 540px; width: 100%; border-top: 4px solid #1BB7C2; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box h4 { padding: 44px 50px 30px; border-bottom: 1px solid #BCBCBC; margin-bottom: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-sales-cart-header-parent { padding: 24px 48px 40px; border-bottom: 1px solid #BCBCBC; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-sales-cart-header { padding: 0; border-bottom: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-sales-cart-header h4 { padding: 0; border-bottom: 0; margin-bottom: 8px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-ticket-category-section { padding: 0; border-bottom: 0; margin-top: 24px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-cart-total { padding: 0; margin-top: 25px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-cart-total h4 { padding: 0; border-bottom: 0; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-cart-total a { position: relative; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-cart-total a .prio-icon-description { top: 38px; left: -19px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-cart-total a:hover .prio-icon-description { display: block; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box .prio-sales-cart-middle-section { padding: 24px 48px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box.prio-order-summary-box-total { margin-top: 32px; padding: 24px 48px; }
+#prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box.prio-order-summary-box-total .prio-order-summary-total { font-size: 30px; font-family: Robotomedium; }
+@media (min-width: 1199px) { #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box-parent { padding-left: 32px; display: block; } }
+@media (min-width: 1600px) { #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid { margin: 0 auto; }
+  #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-checkout-info-box { max-width: 826px; }
+  #prio .prio-main-sales-content.prio-product-checkout .prio-container-fluid .prio-product-description-inner .prio-order-summary-box-parent { padding-left: 32px; } }

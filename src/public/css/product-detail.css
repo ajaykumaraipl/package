@@ -1,0 +1,219 @@
+/*
+1. Typography
+2. Page Layout
+3. Media Query Ranges
+4. colors
+
+
+
+*/
+/********************************** 1. Typography********************/
+/********************************** /Typography********************/
+/********************************** 2. Page Layout********************/
+/********************************** /Page Layout********************/
+/********************************** 3. Media Query Ranges********************/
+/********************************** /Media Query Ranges********************/
+/********************************** 4. colors********************/
+/********************************** /colors********************/
+/*
+
+(1) POSITIONS-MIXINS
+(2) SHADOW-BOX
+(3) BORDERS
+(4) FLEX
+(5) OVERLAY
+
+*/
+/********(1) POSITIONS-MIXINS***********/
+/******** /POSITIONS-MIXINS***********/
+/********(2) SHADOW-BOX***********/
+/******** /SHADOW-BOX***********/
+/********(3) BORDERS***********/
+/******** /BORDERS***********/
+/********(4) FLEX***********/
+/******** /FLEX***********/
+/********(5) OVERLAY***********/
+/******** /OVERLAY***********/
+#prio .prio-custom-tabs { -webkit-box-shadow: none; box-shadow: none; max-width: 324px; width: 100%; border: 1px solid #1BB7C2; border-radius: 50px; float: right; }
+#prio .prio-custom-tabs .tab { -webkit-box-flex: 0; -ms-flex-positive: 0; flex-grow: 0; max-width: 156px; width: 100%; margin-right: 15px; position: relative; top: -1px; }
+#prio .prio-custom-tabs .tab.last-tab { margin-right: 0; }
+#prio .prio-custom-tabs .tab a { max-width: 156px; width: 100%; font-size: 18px; font-family: RobotoRegular, sans-serif; border-radius: 50px; color: #1BB7C2; text-transform: capitalize; }
+#prio .prio-custom-tabs .tab a.active { background-color: #1BB7C2; color: #fff; }
+#prio .prio-custom-tabs .indicator { display: none; }
+#prio .prio-extra-options .prio-extra-option-category { -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+#prio .prio-extra-options .prio-extra-option-category .prio-gray-select { max-width: 432px; width: 100%; }
+#prio .prio-extra-options .prio-extra-option-category .prio-extra-option-category-price h4 { margin-bottom: 0; }
+#prio .prio-extra-options .prio-extra-option-category .prio-add-note-title { font-size: 16px; font-family: RobotoRegular, sans-serif; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner { padding: 64px 50px 75px 50px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-main-sales-product-reverse { -webkit-box-orient: vertical; -webkit-box-direction: reverse; -ms-flex-direction: column-reverse; flex-direction: column-reverse; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner h6, #prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner h5 { font-size: 16px; font-family: Robotomedium; margin: 0; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner h5 { font-size: 18px; line-height: 29px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-header { margin-bottom: 38px; position: relative; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-header .prio-tickets-notifications { position: absolute; left: 3px; top: -26px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content { padding-right: 85px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content h5 { margin-bottom: 8px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content p { font-size: 16px; margin-bottom: 30px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-included-excluded { margin-top: 64px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-included-excluded ul { margin: 16px 0 0; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-included-excluded ul li { font-size: 18px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-included-excluded ul li i { color: #00DC81; margin-right: 12px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-included-excluded .prio-excluded ul li i { color: #FF4411; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-know-before { margin-top: 64px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-know-before ul { font-size: 16px; margin: 16px 0 0; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-additional-information { margin-top: 64px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-middle-content .prio-additional-information ul { margin: 0; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-map { margin-top: 64px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-map h6 { font-family: RobotoRegular, sans-serif; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-map h6 .prio-btn { position: absolute; right: 0; padding: 0 15px; height: 32px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-map .prio-map-container { min-height: 501px; border: 2px solid #fff; width: 100%; margin-top: 32px; padding: 0; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-products { margin-top: 130px; }
+#prio .prio-main-sales-product-detail .prio-main-sales-product-detail-inner .prio-product-detail-products h5 { margin-bottom: 32px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing { max-width: 1398px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row { margin: 0 -16px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 { -webkit-box-flex: 0; -ms-flex: 0 0 calc(100% / 5); flex: 0 0 calc(100% / 5); padding: 0 16px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets { height: 272px; border-bottom: none; width: 254px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-tickets-image-frame { height: 128px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-tickets-content { height: calc(100% - 128px); }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-tickets-content h5 { margin-bottom: 0; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-tickets-content .prio-sales-ticket-price { height: 68px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-ticket-option .prio-sales-option-bottom { position: absolute; bottom: 13px; right: 16px; left: 16px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-ticket-option .prio-sales-option-bottom a { margin: 0 8px; }
+#prio .prio-main-sales-product-detail .prio-sales-ticket-listing .custom-flex-row .xl3 .prio-sales-tickets .prio-sales-ticket-option .prio-sales-option-bottom a.prio-btn-full { padding: 0 29px; }
+#prio .prio-product-booking-module { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-bottom: 60px; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner { max-width: 400px; width: 100%; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box { padding: 6px 0; border-bottom: 4px solid #1BB7C2; margin-bottom: 12px; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-categories { padding: 17px 23px; font-size: 18px; border-bottom: 1px solid #f3f3f3; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-categories .promo-code-title { font-size: 16px; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-categories .prio-category-title { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-booking-module-footer { text-align: center; padding: 20px 0 14px; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-booking-module-footer span { color: #1BB7C2; font-size: 16px; font-family: Robotomedium; display: block; margin-bottom: 12px; text-transform: uppercase; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shadow-box .prio-product-booking-module-footer a { font-size: 18px; font-family: RobotoRegular, sans-serif; padding: 0 59px; height: 48px; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-provided { font-size: 14px; font-family: RobotoRegular, sans-serif; margin-bottom: 32px; display: block; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shorlist { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; padding-top: 3px; cursor: pointer; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shorlist h4 { font-family: RobotoRegular, sans-serif; margin-bottom: 0; }
+#prio .prio-product-booking-module .prio-product-booking-module-inner .prio-shorlist h4 i { margin-right: 12px; }
+#prio .prio-category-price { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; -ms-flex-wrap: wrap; flex-wrap: wrap; font-family: Robotomedium; }
+#prio .prio-category-price .prio-tickets-notifications { position: absolute; left: auto; top: 4px; right: 81px; }
+#prio .prio-category-price .prio-discount { width: 100%; text-align: right; color: #BCBCBC; position: relative; }
+#prio .prio-category-price .prio-discount .prio-line { height: 1px; width: 36%; position: absolute; top: 50%; background-color: #BCBCBC; }
+#prio .prio-category-price h4 { margin-bottom: 0; }
+#prio .prio-product-description .prio-product-description-inner { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; position: relative; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+#prio .prio-product-description .prio-product-description-inner .prio-shadow-box { padding: 0; margin-bottom: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box { max-width: 272px; height: 48px; width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-transform: rotate(0); transform: rotate(0); cursor: pointer; background-color: #fff; position: relative; top: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-hide-box { left: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-show-box { left: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-show-box i { top: 2px; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.primary { color: #1BB7C2; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box h4 { margin-bottom: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-show-hide-box i { margin-right: 24px; font-size: 20px; position: relative; top: -4px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box { padding: 48px 32px; max-width: 100%; width: 100%; margin-bottom: 30px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box h5 { font-size: 18px; font-family: RobotoRegular, sans-serif; margin-bottom: 12px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box h5 span { font-family: Robotomedium; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box p { font-size: 14px; margin-bottom: 16px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box .prio-product-booking-module-options { margin-top: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box .prio-product-booking-module-options ul li { font-size: 14px; margin-bottom: 19px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box h6 { margin: 16px 0 12px; line-height: 19px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box .prio-opening-hours { margin-top: 24px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box .prio-opening-hours span { font-size: 14px; }
+#prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box .prio-additional-information { margin-top: 24px; }
+#prio .prio-product-description .prio-product-description-inner .prio-category-quantity .prio-category-quantity-inner { border: 1px solid #BCBCBC; max-width: 144px; height: 48px; display: -webkit-box; display: -ms-flexbox; display: flex; border-radius: 5px; }
+#prio .prio-product-description .prio-product-description-inner .prio-category-quantity .prio-category-quantity-inner span { width: 48px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
+#prio .prio-product-description .prio-product-description-inner .prio-category-quantity .prio-category-quantity-inner .prio-minus { border-right: 1px solid #BCBCBC; cursor: pointer; }
+#prio .prio-product-description .prio-product-description-inner .prio-category-quantity .prio-category-quantity-inner .prio-plus { border-left: 1px solid #BCBCBC; cursor: pointer; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box { max-width: 100%; width: 100%; padding: 48px; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-bottom: 30px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-box-top { width: 100%; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-box-section { margin-top: 65px; padding-bottom: 36px; border-bottom: 1px solid #eaeaea; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-box-section:last-child { border-bottom: none; padding-bottom: 0; width: 100%; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-combi-timeslots-dates h4 { margin-bottom: 51px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates h6 { margin-bottom: 16px; position: relative; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates h6 a { position: absolute; right: 19px; top: 10%; font-size: 25px; color: #202124; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates h6 a.active { color: #1BB7C2; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul { display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -ms-flex-wrap: wrap; flex-wrap: wrap; width: 100%; margin: 0 -6px; padding-bottom: 48px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li { border: 1px solid #BCBCBC; max-width: 112px; height: 80px; width: 100%; border-radius: 5px; -ms-flex-wrap: wrap; flex-wrap: wrap; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin: 0 6px; margin-bottom: 10px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.active, #prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li:hover { border-color: #1BB7C2; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.active span, #prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li:hover span { color: #1BB7C2; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.active span.prio-date, #prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li:hover span.prio-date { color: #202124; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.disabled { border-color: #eaeaea; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.disabled a { cursor: default; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.disabled span { color: #eaeaea; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li.disabled span.prio-date { color: #eaeaea; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li span { width: 100%; display: block; text-align: center; font-size: 12px; font-family: Robotomedium; color: #202124; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-dates ul li span.prio-date { font-size: 20px; font-family: Robotomedium; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing h6 { margin-bottom: 16px; position: relative; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing h6 a.prio-show { font-size: 14px; color: #202124; font-family: RobotoRegular, sans-serif; position: absolute; right: 26px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing h6 a.prio-show i { margin-left: 12px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul { display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; margin: 0 -6px; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li { max-width: 114px; width: 100%; margin: 0 6px 12px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li.active { border-color: #1BB7C2; background-color: transparent; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li.active a { color: #202124; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li:hover { border-color: #1BB7C2; background: transparent; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li:hover a { color: #202124; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li.disabled { border-color: #eaeaea; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-booking-timeslots-listing ul li.disabled a { color: #eaeaea; cursor: default; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants h6 { margin-bottom: 6px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories { font-size: 18px; border-bottom: 1px solid #BCBCBC; padding: 16px 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .flex-row { -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-product-category-title span { position: relative; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-product-category-title a { position: absolute; right: -15px; top: -12px; color: #dbdbdb; font-size: 14px; cursor: pointer; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-product-category-title a:hover { color: #1BB7C2; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-category-price { -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; font-family: RobotoRegular, sans-serif; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-category-price .prio-tickets-notifications { position: absolute; left: -69px; top: 2px; right: auto; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-category-price .prio-discount { text-align: left; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-categories .prio-category-price .prio-discount .prio-line { width: 31%; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options { border-left: 4px solid #1BB7C2; padding-left: 33px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options h6 { font-size: 14px; font-family: Robotomedium; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options .prio-product-extra-option:first-child h6 { margin-top: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options .prio-product-extra-option h6 { color: #BCBCBC; margin-top: 16px; font-size: 12px; margin-top: 16px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options .prio-product-extra-option-inner { font-size: 14px; padding: 6px 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options .prio-product-extra-option-inner .prio-product-category-title { font-family: Robotomedium; padding-left: 32px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-category-extra-options .prio-product-extra-option-inner .prio-category-quantity .prio-category-quantity-inner { max-width: 96px; height: 32px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-select-participants .prio-product-total { font-size: 20px; font-family: Robotomedium; padding: 15px 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-categories-heading { color: #BCBCBC; font-size: 14px; padding: 16px 0; border-bottom: 1px solid #BCBCBC; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-extra-options-box h6 { margin-bottom: 6px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-extra-options-box h6 .prio-remaining { font-size: 16px; font-family: RobotoRegular, sans-serif; color: #1BB7C2; margin-left: 32px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-extra-options-box .prio-product-category-extra-options { border-left: none; padding-left: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-footer { margin-top: 81px; width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-footer h6 { font-size: 16px; font-family: Robotomedium; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-footer .prio-btn { padding: 0 60px; height: 48px; font-size: 18px; line-height: 22px; font-family: RobotoRegular, sans-serif; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-product-description-footer .prio-btn.prio-btn-border { margin-right: 16px; }
+#prio .prio-product-description .prio-product-description-inner .prio-product-description-box .prio-checkout-info-box-footer .prio-btn { right: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box { padding: 48px 32px 32px; margin-left: 0; min-height: 100%; height: 100%; max-width: 100%; width: 100%; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box.prio-booking-box-full { max-width: 100%; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box h4 { margin-bottom: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section h6 { margin-bottom: 16px; margin-top: 32px; line-height: 19px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section p { font-size: 14px; font-family: RobotoRegular, sans-serif; margin-bottom: 8px; line-height: 18px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section .prio-date-time { display: block; color: #BCBCBC; font-size: 14px; line-height: 17px; font-family: RobotoRegular, sans-serif; margin-bottom: 8px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section .prio-edit-remove { display: block; line-height: 17px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section .prio-edit-remove a { color: #BCBCBC; font-size: 14px; font-family: RobotoRegular, sans-serif; margin-right: 16px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-section .prio-edit-remove a:last-child { margin-right: 0; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer { margin-top: 32px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer h4 { margin-bottom: 22px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer a.prio-btn-border { height: 32px; padding: 0 15px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer .prio-tags-content { margin: 0 -4px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer .prio-tags-content a { border: 1px solid #BCBCBC; padding: 8px 12px 7px; color: #BCBCBC; border-radius: 20px; margin: 2px 4px; display: inline-block; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer .prio-tags-content a:hover { border-color: #1BB7C2; background-color: #1BB7C2; color: #fff; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer .prio-add-note-input { margin-top: 16px; margin-bottom: 20px; }
+#prio .prio-product-description .prio-product-description-inner .prio-booking-box .prio-booking-box-footer .prio-add-note-input input { border: 1px solid #BCBCBC; min-height: 127px; width: 100%; padding: 10px; }
+#prio .prio-product-booking-module-options { margin-top: 48px; }
+#prio .prio-product-booking-module-options ul { margin: 0; }
+#prio .prio-product-booking-module-options ul li { font-size: 18px; font-family: Robotomedium; padding-left: 40px; position: relative; margin-bottom: 32px; }
+#prio .prio-product-booking-module-options ul li:last-child { margin-bottom: 0; }
+#prio .prio-product-booking-module-options ul li.prio-free-cancellation { color: #00DC81; }
+#prio .prio-product-booking-module-options ul li.prio-non-refundable { color: #FF4411; }
+#prio .prio-product-booking-module-options ul li i { position: absolute; left: 0; top: 6px; }
+#prio .prio-opening-hours { margin-top: 64px; }
+#prio .prio-opening-hours h4 { margin-bottom: 16px; }
+#prio .prio-opening-hours span { display: block; font-size: 18px; }
+#prio .prio-opening-hours .prio-days span { color: #6d6d6d; font-family: RobotoRegular, sans-serif; }
+#prio .prio-opening-hours .prio-time span { font-family: Robotomedium; }
+@media (min-width: 1199px) { #prio .prio-product-booking-module { margin-bottom: 0; } }
+@media (min-width: 1600px) { #prio .prio-product-description .prio-product-description-inner { -ms-flex-wrap: inherit; flex-wrap: inherit; }
+  #prio .prio-product-description .prio-product-description-inner .prio-show-hide-box { position: absolute; top: 112px; -webkit-transform: rotate(270deg); transform: rotate(270deg); }
+  #prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-hide-box { left: -161px; }
+  #prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-show-box { left: -159px; }
+  #prio .prio-product-description .prio-product-description-inner .prio-ticket-detail-box { max-width: 381px; margin-bottom: 0; }
+  #prio .prio-product-description .prio-product-description-inner .prio-product-description-box { max-width: 969px; margin-bottom: 0; }
+  #prio .prio-product-description .prio-product-description-inner .prio-booking-box { max-width: 254px; margin-left: 32px; }
+  #prio .prio-product-description .prio-product-description-inner .prio-booking-box.prio-booking-box-full { max-width: 397px; } }
+@media (min-width: 1699px) { #prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-hide-box { left: -113px; }
+  #prio .prio-product-description .prio-product-description-inner .prio-show-hide-box.prio-show-box { left: 124px; } }

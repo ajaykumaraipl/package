@@ -1,0 +1,101 @@
+/*
+1. Typography
+2. Page Layout
+3. Media Query Ranges
+4. colors
+
+
+
+*/
+
+
+
+/********************************** 1. Typography********************/
+
+$font-stack: RobotoRegular, sans-serif !default;
+$font-light: Robotolight !default;
+$font-bold: RobotoBold !default;
+$font-medium: Robotomedium !default;
+$off-black: #202124 /*rgba(0, 0, 0, 0.87)*/ !default;
+$blackColor: #000;
+// Header Styles
+
+$h1-fontsize: 36px !default;
+$h2-fontsize: 30px !default;
+$h3-fontsize: 24px !default;
+$h4-fontsize: 18px !default;
+$h5-fontsize: 14px !default;
+$h6-fontsize: 1.25rem !default;
+
+$h1-lineheight: 45px !default;
+$h2-lineheight: 38px !default;
+$h3-lineheight: 30px !default;
+$h4-lineheight: 22px !default;
+$h5-lineheight: 17px !default;
+
+$subtitle-fontsize: 20px !default;
+$subtitle2-fontsize: 18px !default;
+$caption-fontsize: 10px !default;
+
+$body1-fontsize: 16px !default;
+$body2-fontsize: 16px !default;
+$body3-fontsize: 14px !default;
+$body4-fontsize: 14px !default;
+$body5-fontsize: 12px !default;
+$body6-fontsize: 12px !default;
+
+$border-button: 12px !default;
+$full-button: 14px !default;
+
+$labelSize: 12px !default;
+
+
+/********************************** /Typography********************/
+
+/********************************** 2. Page Layout********************/
+
+
+/********************************** /Page Layout********************/
+
+/********************************** 3. Media Query Ranges********************/
+
+$extra-small-screen-up: 576px !default;
+$small-screen-up: 768px !default;
+$medium-screen-up: 1199px !default;
+$large-screen-up: 1601px !default;
+$extra-large-screen-up: 1921px !default;
+/********************************** /Media Query Ranges********************/
+
+/********************************** 4. colors********************/
+
+$primaryColor: #1BB7C2;
+$secondaryColor: #29A2AC;
+
+
+$borderColor: #eaeaea !default;
+$progressBackgroundColor: #eaeaea !default;
+
+$defaultIconColor: #eaeaea !default;
+$disabledColor: #eaeaea !default;
+
+$whiteColor: #fff !default;
+$body1Color: #FAFAFA !default;
+$body2Color: #EAEAEA !default;
+$body3Color: #BCBCBC !default;
+$placeholderColor:#BCBCBC !default;
+$body4Color: #6D6D6D !default;
+$body5Color: #202124 !default;
+$ticketNotificationColor: #F9B000 !default;
+
+
+$actionColor: #00DC81 !default;
+$action1Color: #5FE4AB !default;
+$action2Color: #FFE500 !default;
+$action3Color: #FF9700 !default;
+$action4Color: #FF4411 !default;
+
+$labelColor: #6d6d6d !default;
+$errorColor : #FF4411 !default;
+$disabledlabelColor: #bcbcbc !default;
+
+/********************************** /colors********************/

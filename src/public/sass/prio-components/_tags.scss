@@ -1,0 +1,14 @@
+#prio{
+    .prio-tags {
+        &.primary { color: $primaryColor;}
+        &.action { color: $actionColor; }
+        &.disabled { color: $body3Color;}
+        &.action3 { color: $action3Color;}
+        &.prio-tags-rounded {
+            font-family: $font-stack; padding: 0 16px; text-align: center; line-height: 20px; display: inline-block; border-radius: 20px;
+            &.primary{ background: rgba(27, 183, 194, 0.3)} 
+            &.action { background: rgba(0, 220, 129, 0.3)}
+            &.disabled { background: transparent; border: 1px solid $body2Color; line-height: 18px;}
+        }
+    }
+}

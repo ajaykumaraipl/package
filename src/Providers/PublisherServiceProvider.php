@@ -29,8 +29,12 @@ class PublisherServiceProvider extends ServiceProvider
             ['namespace' => 'Package\Publication\Controllers'],
             function () {
                 include __DIR__.'/../Route/web.php';
-            }
+            },
         );
+
+        $this->publishes([
+                __DIR__.'/../public' => public_path(),
+            ], 'public');
 
         // register migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
