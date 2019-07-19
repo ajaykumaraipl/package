@@ -27,7 +27,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Admin\\Frontend\\Providers\\PublisherServiceProvider"
+                "Package\\Publication\\Providers\\PublisherServiceProvider"
             ]
         }
     },
