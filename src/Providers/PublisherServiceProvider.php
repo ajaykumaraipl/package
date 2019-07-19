@@ -32,10 +32,6 @@ class PublisherServiceProvider extends ServiceProvider
             },
         );
 
-        $this->publishes([
-                __DIR__.'/../public' => public_path(),
-            ], 'public');
-
         // register migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
