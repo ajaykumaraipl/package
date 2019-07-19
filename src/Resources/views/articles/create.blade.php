@@ -58,18 +58,6 @@
                                 <div class="error"  style="color:red">{{ $message }}</div>
                             @enderror
 
-                            <!-- Slug -->
-                            <input type="text" class="@error('slug') is-invalid @enderror form-control mb-4" value="{{ old('slug') }}" name="slug" placeholder="Slug">
-                            @error('slug')
-                                <div class="error"  style="color:red">{{ $message }}</div>
-                            @enderror
-
-                            <!-- date -->
-                            <input type="date" class="@error('date') is-invalid @enderror form-control mb-4" value="{{ old('date') }}" name="date" placeholder="Date">
-                            @error('date')
-                                <div class="error"  style="color:red">{{ $message }}</div>
-                            @enderror
-
                             <!-- content -->
                             <div class="form-group">
                                 <textarea class="@error('content') is-invalid @enderror form-control rounded-0" rows="3" name="content" placeholder="Content">{{ htmlspecialchars(old('content')) }}</textarea>
@@ -77,7 +65,7 @@
                             @error('content')
                                 <div class="error"  style="color:red">{{ $message }}</div>
                             @enderror
-                            
+
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -92,21 +80,39 @@
                             <input type="hidden" id="img-data" name="imgdata"/>
                             <div class="col-sm" id="result-wrapper"></div>
                             @error('image')
+                            <div class="error"  style="color:red">{{ $message }}</div>
+                            @enderror
+
+                            <!-- Status -->
+                            <select class="@error('status') is-invalid @enderror browser-default custom-select mb-4" name="status">
+                                <option value="">Choose status</option>
+                                <option value="0" {!! ((old('status') ==  '0') ? 'selected' : '' ) !!}> Draft </option>
+                                <option value="1" {!! ((old('status') ==  '1') ? 'selected' : '' ) !!}> Publish </option>
+                                <option value="2" {!! ((old('status') ==  '2') ? 'selected' : '' ) !!}> Unpublish </option>
+                            </select>
+                            @error('status')
                                 <div class="error"  style="color:red">{{ $message }}</div>
                             @enderror
 
+                            <!-- publish_date -->
+                            <input type="date" class="@error('publish_date') is-invalid @enderror form-control mb-4" value="{{ old('publish_date') }}" name="publish_date" placeholder="Date">
+                            @error('publish_date')
+                            <div class="error"  style="color:red">{{ $message }}</div>
+                            @enderror
+                            
+
                             <!-- Category -->
-                            <select class="@error('category_id') is-invalid @enderror browser-default custom-select mb-4" name="category_id">
+                            <select class="@error('categories_id') is-invalid @enderror browser-default custom-select mb-4" name="categories_id">
                                 <option value="">Choose category</option>
                                 @foreach ($categories as $categorie)
                                     @php
-                                        $selected = (old('category_id') ==  $categorie->id)?'selected':'';    
+                                        $selected = (old('categories_id') ==  $categorie->id)?'selected':'';    
                                     @endphp
                                     <option value="{!! $categorie->id !!}" {!! $selected !!}>{!! $categorie->name !!}</option>
                                 @endforeach
                             </select>
-                            @error('category_id')
-                                <div class="error"  style="color:red">{{ $message }}</div>
+                            @error('categories_id')
+                            <div class="error"  style="color:red">{{ $message }}</div>
                             @enderror
 
                             <!-- Tag -->
@@ -120,16 +126,6 @@
                                 @endforeach
                             </select>
                             @error('tags')
-                                <div class="error"  style="color:red">{{ $message }}</div>
-                            @enderror
-
-                            <!-- Status -->
-                            <select class="@error('status') is-invalid @enderror browser-default custom-select mb-4" name="status">
-                                <option value="">Choose status</option>
-                                <option value="Publish" {!! ((old('status') ==  'Publish') ? 'selected' : '' ) !!}> Publish </option>
-                                <option value="Draft" {!! ((old('status') ==  'Draft') ? 'selected' : '' ) !!}> Draft </option>
-                            </select>
-                            @error('status')
                                 <div class="error"  style="color:red">{{ $message }}</div>
                             @enderror
                         
@@ -172,11 +168,16 @@
                                 enableOrientation: true,
                                 url: e.target.result
                             });
-                            console.log($('#result-wrapper'));
-                            console.log(resize);
+                            $("#result-wrapper").show(function(){
+                                resize.result('base64').then(function(dataImg) {
+                                    let issetImage = $("#upload").val();
+                                    if(issetImage !== ''){
+                                        $("#img-data").val(dataImg);
+                                    }
+                                });
+                            });
                             $("#result-wrapper").on('mouseleave', function(){
                                 resize.result('base64').then(function(dataImg) {
-                                    // console.log(dataImg);
                                     let issetImage = $("#upload").val();
                                     if(issetImage !== ''){
                                         $("#img-data").val(dataImg);
@@ -184,8 +185,7 @@
                                 });
                             });
                         }
-                        reader.readAsDataURL(input.files[0]);
-                        $("#result-wrapper").show('slow');
+                        console.log(reader.readAsDataURL(input.files[0]));
                     }
                 }
             });

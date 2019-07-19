@@ -50,33 +50,19 @@
             <div class="row m-t-20">
                 <div class="col-md-8 col-md-offset-2" style="margin: 0 auto;">
                 <!-- Default box -->
-                    <form class="text-center border border-light p-5" method="post" action="{{ url('/news/edit/'.$singleNews->id) }}" enctype="multipart/form-data">
+                    <form class="text-center border border-light p-5" method="post" action="{{ url('/news/update/'.$singleArticle->id) }}" enctype="multipart/form-data">
                         @csrf
                         <p class="h4 mb-4 text-muted">Edit article</p>
                     
                         <!-- Title -->
-                        <input type="text" class="@error('title') is-invalid @enderror form-control mb-4" value="{!! $singleNews->title !!}" name="title" placeholder="title">
+                        <input type="text" class="@error('title') is-invalid @enderror form-control mb-4" value="{!! $singleArticle->title !!}" name="title" placeholder="title">
                         @error('title')
-                            <div class="error"  style="color:red">{{ $message }}</div>
-                        @enderror
-
-                        <!-- Slug -->
-                        <input type="text" class="@error('slug') is-invalid @enderror form-control mb-4" value="{!! $singleNews->slug !!}" name="slug" placeholder="slug">
-                        @error('slug')
-                            <div class="error"  style="color:red">{{ $message }}</div>
-                        @enderror
-
-                        <!-- date -->
-                        <input type="date" class="@error('date') is-invalid @enderror form-control mb-4" value="{!! date("Y-m-d", strtotime($singleNews->date)) !!}" name="date" placeholder="date">
-                        @error('date')
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
 
                         <!-- content -->
                         <div class="form-group">
-                            <textarea class="@error('content') is-invalid @enderror form-control rounded-0" rows="3" name="content" placeholder="content">
-                                {!! htmlspecialchars($singleNews->content) !!}
-                            </textarea>
+                            <textarea class="@error('content') is-invalid @enderror form-control rounded-0" rows="3" name="content" placeholder="content">{!! htmlspecialchars($singleArticle->content) !!}</textarea>
                         </div>
                         @error('content')
                             <div class="error"  style="color:red">{{ $message }}</div>
@@ -93,48 +79,55 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="{{ url('uploads/packages/publications/images/thumbnail/small/'.$singleNews->image)}}" />
+                        <img src="{{ url('uploads/packages/publications/images/thumbnail/small/'.$singleArticle->image)}}" />
                         <input type="hidden" id="img-data" name="imgdata"/>
                         <div class="col-sm" id="result-wrapper"></div>
                         @error('image')
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
 
+                        <!-- Status -->
+                        <select class="@error('status') is-invalid @enderror browser-default custom-select mb-4" name="status">
+                            <option value="">Choose status</option>
+                            <option value="0" {!! (($singleArticle->status ==  '0') ? 'selected' : '' ) !!} > Draft </option>
+                            <option value="1" {!! (($singleArticle->status ==  '1') ? 'selected' : '') !!} > Publish </option>
+                            <option value="2" {!! (($singleArticle->status ==  '2') ? 'selected' : '') !!} > Unublish </option>
+                        </select>
+                        @error('status')
+                            <div class="error"  style="color:red">{{ $message }}</div>
+                        @enderror
+
+                        <!-- publish_date -->
+                        <input type="date" class="@error('publish_date') is-invalid @enderror form-control mb-4" value="{!! date("Y-m-d", strtotime($singleArticle->publish_date)) !!}" name="publish_date" placeholder="Publish Date">
+                        @error('publish_date')
+                            <div class="error"  style="color:red">{{ $message }}</div>
+                        @enderror
+
                         <!-- Category -->
-                        <select class="@error('category_id') is-invalid @enderror browser-default custom-select mb-4" name="category_id">
+                        <select class="@error('categories_id') is-invalid @enderror browser-default custom-select mb-4" name="categories_id[]">
                             <option value="">Choose category</option>
                             @foreach ($categories as $categorie)
-                                @php
-                                    $selected = ($singleNews->category_id ==  $categorie->id)?'selected':'';    
+                                @php                                    
+                                    $selected = (in_array($categorie->id, array_column(array_column($singleArticle->categories->toArray(), "pivot"), "categories_id")))?'selected':'';    
                                 @endphp
                                 <option value="{!! $categorie->id !!}" {!! $selected !!}>{!! $categorie->name !!}</option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('categories_id')
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
 
                         <!-- Tag -->
-                        <select class="@error('tags') is-invalid @enderror browser-default custom-select mb-4" name="tags">
+                        <select class="@error('tags') is-invalid @enderror browser-default custom-select mb-4" name="tags[]">
                             <option value="">Choose Tag</option>
                             @foreach ($tags as $tag)
                                 @php
-                                    $selected = ($singleNews->tag ==  $tag->id)?'selected':"$singleNews->tag ==  $tag->id";
+                                    $selected = (in_array($tag->id,array_column(array_column($singleArticle->tags->toArray(), "pivot"), "tags_id")))?'selected':"$singleArticle->tag ==  $tag->id";
                                 @endphp
                                 <option value="{!! $tag->id !!}" {!! $selected !!}>{!! $tag->name !!}</option>
                             @endforeach
                         </select>
                         @error('tags')
-                            <div class="error"  style="color:red">{{ $message }}</div>
-                        @enderror
-
-                        <!-- Status -->
-                        <select class="@error('status') is-invalid @enderror browser-default custom-select mb-4" name="status">
-                            <option value="">Choose status</option>
-                            <option value="Publish" {!! (($singleNews->status ==  'Publish') ? 'selected' : '') !!} > Publish </option>
-                            <option value="Draft" {!! (($singleNews->status ==  'Draft') ? 'selected' : '' ) !!} > Draft </option>
-                        </select>
-                        @error('status')
                             <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
                     

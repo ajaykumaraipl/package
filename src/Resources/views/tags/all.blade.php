@@ -71,7 +71,7 @@
                                         <thead>
                                             <tr role="row">
                                                 <th>Name</th>
-                                                <th>Slug</th>
+                                                <th>Description</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

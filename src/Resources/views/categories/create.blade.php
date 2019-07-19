@@ -64,10 +64,24 @@
 
                         <!-- Description -->
                         <div class="form-group">
-                            <textarea class="@error('description') is-invalid @enderror form-control rounded-0" rows="3" name="description" placeholder="Description">{{ htmlspecialchars(old('description')) }}</textarea>
+                            <textarea class="@error('description') is-invalid @enderror form-control rounded-0" rows="3" name="description" placeholder="Description">{{ old('description') }}</textarea>
                         </div>
                         @error('description')
                             <div class="error"  style="color:red">{{ $message }}</div>
+                        @enderror
+
+                        <!-- Category -->
+                        <select class="@error('parent_id') is-invalid @enderror browser-default custom-select mb-4" name="parent_id">
+                            <option value="">Choose category</option>
+                            @foreach ($categories as $categorie)
+                                @php
+                                    $selected = (old('parent_id') ==  $categorie->id)?'selected':'';    
+                                @endphp
+                                <option value="{!! $categorie->id !!}" {!! $selected !!}>{!! $categorie->name !!}</option>
+                            @endforeach
+                        </select>
+                        @error('parent_id')
+                        <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
 
                         <!-- Send button -->

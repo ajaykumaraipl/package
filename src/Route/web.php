@@ -11,10 +11,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('news/edit/{id}', 'ArticlesController@edit');
     Route::get('news/create', 'ArticlesController@create');
     Route::get('news/delete/{id}', 'ArticlesController@delete');
+    Route::get('news/publish/{id}', 'ArticlesController@publish');
+    Route::get('news/unpublish/{id}', 'ArticlesController@unpublish');
+    Route::get('news/duplicate/{id}', 'ArticlesController@duplicate');
 
     // News Post
-    Route::post('news/save', 'ArticlesController@save');
-    Route::post('news/edit/{id}', 'ArticlesController@update');
+    Route::post('news/save', 'ArticlesController@store');
+    Route::post('news/update/{id}', 'ArticlesController@update');
 
 
     // Categories Routing
@@ -24,7 +27,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('categories/delete/{id}', 'CategoriesController@delete');
 
     // Categories Post
-    Route::post('categories/save', 'CategoriesController@save');
+    Route::post('categories/save', 'CategoriesController@store');
     Route::post('categories/edit/{id}', 'CategoriesController@update');
 
 
@@ -35,6 +38,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('tags/delete/{id}', 'TagsController@delete');
 
     // Tags Post
-    Route::post('tags/save', 'TagsController@save');
+    Route::post('tags/save', 'TagsController@store');
     Route::post('tags/edit/{id}', 'TagsController@update');
 });

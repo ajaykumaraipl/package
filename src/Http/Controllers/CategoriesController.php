@@ -1,11 +1,12 @@
 <?php
 
-namespace Admin\Frontend\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Request;
-use Admin\Frontend\Models\Categories;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
+//Models
+use App\Models\Categories;
 
 class CategoriesController extends BaseController
 {
@@ -15,21 +16,35 @@ class CategoriesController extends BaseController
      *
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allCategories = Categories::getAllCategories();
-        return view('view::categories.all', ['allCategories' => $allCategories]);
+        $allCategories = Categories::all();
+        return view('view::categories.all')->with(['allCategories' => $allCategories]);
     }
-
+    
     /**
      * Create function
      * To load the view only for create categoeries
      *
      * @return void view
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('view::categories.create');
+        $categories = Categories::all();
+        return view('view::categories.create')->with(['categories' => $categories]);
+    }
+    
+    /**
+     * Edit function
+     * To load the view only for create categoeries
+     *
+     * @return void view
+     */
+    public function edit(Request $request)
+    {
+        $allCategories = Categories::all();
+        $categories = Categories::find($request->id);
+        return view('view::categories.edit')->with(['singleCategory' => $categories, 'allCategories' => $allCategories]);
     }
 
     /**
@@ -39,26 +54,24 @@ class CategoriesController extends BaseController
      * @param Request $request
      * @return void
      */
-    public function save(Request $request)
+    public function store(Request $request)
     {
-        $request = Request::all();
-
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "name" => "required",
             "description" => "required"
         ]);
-            
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
 
         $categories = new Categories(array(
-            'name' => $request['name'],
-            'description' => $request['description']
+            'reseller_id' => '0',
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => 'placeholder.png',
+            'parent_id' => $request->parent_id?:0,
+            'updated_by' => '0'
         ));
-        $result = Categories::storCategory($categories);
-        if ($result) {
+        
+        if ($categories->save()) {
             return redirect('/categories');
         } else {
             return view('view::categories.404');
@@ -66,69 +79,44 @@ class CategoriesController extends BaseController
     }
 
     /**
-     * Edit function
-     * To load the view only for edit categoeries
-     *
-     * @param [type] $id
-     * @return void
-     */
-    public function edit($id)
-    {
-        $singleCategory = Categories::getSingleCategory($id);
-        return view('view::categories.edit', ['singleCategory' => $singleCategory]);
-    }
-
-    /**
-     * Update function
-     * To update the categoeries
+     * Save function
+     * To save categoeries
      *
      * @param Request $request
-     * @param [type] $id
      * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request = Request::all();
-        
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "name" => "required",
             "description" => "required"
         ]);
-            
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-        
-        $singleCategory = Categories::getSingleCategory($id);
-        $singleCategory = array(
-            'name' => $request['name'] ?: $singleCategory['name'],
-            'description' => $request['description'] ?: $singleCategory['name']
+
+        $singleCategories = Categories::find($request->id);
+        $categories = array(
+            'reseller_id' => '0',
+            'name' => $request->name?:$singleCategories->name,
+            'description' => $request->description?:$singleCategories->description,
+            'image' => $request->image?:$singleCategories->image,
+            'parent_id' => $request->parent_id?:$singleCategories->parent_id,
+            'updated_by' => '0'
         );
-        $result = Categories::updateCategory($singleCategory, $id);
-        if ($result) {
+        
+        if ($singleCategories->update($categories)) {
             return redirect('/categories');
         } else {
             return view('view::categories.404');
         }
     }
 
-
-    /**
-     * Delete function
-     * To delete the categoeries
-     *
-     * @param [type] $id
-     * @return void
-     */
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $result = Categories::deleteCategory($id);
-        if ($result) {
-            return redirect()->back();
+        $category = Categories::find($request->id);
+        if ($category->delete()) {
+            return redirect('/categories');
         } else {
             return view('view::categories.404');
         }
     }
-
 }

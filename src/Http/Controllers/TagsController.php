@@ -1,77 +1,74 @@
 <?php
 
-namespace Admin\Frontend\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Request;
-use Admin\Frontend\Models\Tags;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
+//Models
+use App\Models\Tags;
 
 class TagsController extends BaseController
 {
+
     /**
      * Index function
-     * To fetch all Tags pass to the view
+     * To fetch all categoeries pass to the view
      *
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tags::getAllTags();
-        return view('view::tags.all', ['tags' => $tags]);
+        $tags = Tags::all();
+        return view('view::tags.all')->with(['tags' => $tags]);
     }
-
+    
     /**
      * Create function
-     * To load the view only for create Tags
+     * To load the view only for create categoeries
      *
      * @return void view
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('view::tags.create');
     }
-
+    
     /**
-     * Edit function
-     * To load the view only for edit Tags
+     * Create function
+     * To load the view only for create categoeries
      *
-     * @param [type] $id
-     * @return void
+     * @return void view
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $singleTag = Tags::getSingleTag($id);
-        return view('view::tags.edit', ['singleTag' => $singleTag]);
+        $singleTag = Tags::find($request->id);
+        return view('view::tags.edit')->with(['singleTag' => $singleTag]);
     }
 
     /**
      * Save function
-     * To save Tags
+     * To save categoeries
      *
      * @param Request $request
      * @return void
      */
-    public function save(Request $request)
+    public function store(Request $request)
     {
-        $request = Request::all();
-
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "name" => "required",
             "description" => "required"
         ]);
-            
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
 
         $tags = new Tags(array(
-            'name' => $request['name'],
-            'description' => $request['description']
+            'reseller_id' => '0',
+            'name' => $request->name,
+            'description' => $request->description,
+            'updated_by' => '0'
         ));
-        $result = Tags::storTag($tags);
-        if ($result) {
+        
+        if ($tags->save()) {
             return redirect('/tags');
         } else {
             return view('view::tags.404');
@@ -79,52 +76,40 @@ class TagsController extends BaseController
     }
 
     /**
-     * Update function
-     * To update the Tags
+     * Save function
+     * To save categoeries
      *
      * @param Request $request
-     * @param [type] $id
      * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request = Request::all();
-
         // validate the data
-        $validator = Validator::make($request, [
+        $request->validate([
             "name" => "required",
             "description" => "required"
         ]);
-            
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
 
-        $singleTag = Tags::getSingleTag($id);
-        $singleTag = array(
-            'name' => $request['name'] ?: $singleTag['name'],
-            'description' => $request['description'] ?: $singleTag['description']
+        $singleTag = Tags::find($request->id);
+        $tag = array(
+            'reseller_id' => '0',
+            'name' => $request->name?:$singleTag->name,
+            'description' => $request->description?:$singleTag->name,
+            'updated_by' => '0'
         );
-        $result = Tags::updateTag($singleTag, $id);
-        if ($result) {
+        
+        if ($singleTag->update($tag)) {
             return redirect('/tags');
         } else {
             return view('view::tags.404');
         }
     }
 
-    /**
-     * Delete function
-     * To delete the Tags
-     *
-     * @param [type] $id
-     * @return void
-     */
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $Tag = Tags::deleteTag($id);
-        if ($Tag) {
-            return redirect()->back();
+        $tag = Tags::find($request->id);
+        if ($tag->delete()) {
+            return redirect('/tags');
         } else {
             return view('view::tags.404');
         }

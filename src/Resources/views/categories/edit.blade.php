@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+name<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Bootstrap Example</title>
@@ -51,41 +51,6 @@
                 </a>
             <div class="row m-t-20">
                 <div class="col-md-8 col-md-offset-2" style="margin: 0 auto;">
-                <!-- Default box -->
-                    {{-- <form method="post" action="{{ url('/categories/edit/'.$singleCategory->id) }}">
-                        @csrf
-                        <div class="col-md-12">
-                            <div class="row display-flex-wrap">
-                                <!-- load the view from the application if it exists, otherwise load the one in the package -->
-
-                                <div class="box col-md-12 padding-10 p-t-20">
-                                <!-- load the view from type and view_namespace attribute if set -->
-
-                                    <!-- text input -->
-                                    <div class="form-group col-xs-12">
-                                        <label>Name</label>
-                                        <input type="text" name="name" value="{!! $singleCategory->name !!}" class="@error('name') is-invalid @enderror form-control">
-                                        @error('name')
-                                            <div class="error"  style="color:red">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- text input -->
-                                    <div class="form-group col-xs-12">
-                                        <label>Description</label>
-                                        <input type="text" name="description" value="{!! $singleCategory->description !!}" class="@error('description') is-invalid @enderror form-control">
-                                        @error('description')
-                                            <div class="error"  style="color:red">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-xs-12">
-                                        <input type="submit" value="Create" class="btn btn-success">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form> --}}
                     <form class="text-center border border-light p-5" method="post" action="{{ url('/categories/edit/'.$singleCategory->id) }}">
                         @csrf
                         <p class="h4 mb-4">Edit Category</p>
@@ -102,6 +67,20 @@
                         </div>
                         @error('description')
                             <div class="error"  style="color:red">{{ $message }}</div>
+                        @enderror
+
+                        <!-- Category -->
+                        <select class="@error('parent_id') is-invalid @enderror browser-default custom-select mb-4" name="parent_id">
+                            <option value="">Choose category</option>
+                            @foreach ($allCategories as $categorie)
+                                @php
+                                    $selected = ($singleCategory->parent_id ==  $categorie->id)?'selected':'';    
+                                @endphp
+                                <option value="{!! $categorie->id !!}" {!! $selected !!}>{!! $categorie->name !!}</option>
+                            @endforeach
+                        </select>
+                        @error('parent_id')
+                        <div class="error"  style="color:red">{{ $message }}</div>
                         @enderror
 
                         <!-- Send button -->

@@ -1,19 +1,20 @@
 <?php
 
-namespace Admin\Frontend\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
-// Facades
-use Intervention\Image\Facades\Image;
+//Facades
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
-// Models
-use Admin\Frontend\Models\ArticlesTag;
-use Admin\Frontend\Models\Categories;
-use Admin\Frontend\Models\Articles;
-use Admin\Frontend\Models\Tags;
+//Models
+use App\Models\ArticlesCategories;
+use App\Models\ArticlesTags;
+use App\Models\Categories;
+use App\Models\Articles;
+use App\Models\Tags;
 
 class ArticlesController extends BaseController
 {
@@ -23,180 +24,219 @@ class ArticlesController extends BaseController
      *
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Articles::getAllArticles();
-        $tags = Tags::getAllTags();
-        return view('view::articles.all', ['allNews' => $articles, "tags" => $tags]);
+        $article = Articles::all();
+        return view('view::articles.all')->with(['allNews' => $article]);
     }
 
-    /**
-     * Create function
-     * To load the view only for create article
-     *
-     * @return void view
-     */
-    public function create()
+    public function create(Request $request)
     {
-        $categories = Categories::getAllCategories();
-        $tags = Tags::getAllTags();
+        $categories = Categories::all();
+        $tags = Tags::all();
         return view('view::articles.create', [ "categories" => $categories, "tags" => $tags]);
     }
     
-    /**
-     * Save function
-     * To save article and related categories and tags and image(actual, cover, thumbnail)
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function save(Request $request)
+    public function edit(Request $request)
+    {
+        $singleArticle = Articles::find($request->id);
+        $categories = Categories::all();
+        $tags = Tags::all();
+        return view('view::articles.edit', [ "singleArticle" => $singleArticle, "categories" => $categories, "tags" => $tags]);
+    }
+
+    public function store(Request $request)
     {
         // validate the data
         $request->validate([
-            "category_id" => "required",
             "title" => "required",
-            "slug" => "required",
             "content" => "required",
-            "status" => "required",
             "image" => "required|image|mimes:jpeg,png,jpg,gif",
-            "date" => "required",
-            "tags" => "required"
+            "status" => "required",
+            "publish_date" => "required",
         ]);
-            
+
         $data = $request->imgdata;
-        $newName = rand()."_".$request->image->getClientOriginalExtension();
-        $this->imageAction($data, $newName);
-        
-        $submittedData = array(
-            'category_id' => $request['category_id'],
-            'title' => $request['title'],
-            'slug' => $request['slug'],
-            'content' => $request['content'],
+        $newName = rand().".".$request->image->getClientOriginalExtension();
+        $this->createImage($data, $newName);
+
+        $article = array(
+            'reseller_id' => '0',
+            'title' => $request->title,
+            'content' => $request->content,
             'image' => $newName,
-            'status' => $request['status'],
-            'date' => $request['date']
+            'status' => $request->status,
+            'publish_date' => $request->publish_date,
+            'updated_by' => '0'
         );
-        $lastInsertedId = Articles::storArticle($submittedData);
+        $article = Articles::create($article);
+        $articleId = $article->id;
         
-        $tags = array(
-            'article_id' => $lastInsertedId,
-            'tag_id' => $request['tags']
+        $categories = new ArticlesCategories(array(
+            'articles_id' => $articleId,
+            'categories_id' => $request->categories_id,
+            'updated_by' => '0'
+        ));
+        $categories->save();
+
+        $tags = new ArticlesTags(array(
+            'articles_id' => $articleId,
+            'tags_id' => $request->tags,
+            'updated_by' => '0'
+        ));
+        $tags->save();
+        
+        return redirect('/news');
+    }
+
+    public function update(Request $request)
+    {
+        $newName = '';
+        // validate the data
+        $request->validate([
+            "title" => "required",
+            "content" => "required",
+            "publish_date" => "required",
+            "status" => "required",
+        ]);
+        $singleArticle = Articles::find($request->id);
+        $articlesCategories = array_column(array_column($singleArticle->categories->toArray(), "pivot"), "categories_id");
+        $articlesTags = array_column(array_column($singleArticle->tags->toArray(), "pivot"), "tags_id");
+        
+        
+        if (!empty($request->image)) {
+            $request->validate([
+                "image" => "required|image|mimes:jpeg,png,jpg,gif",
+            ]);
+            
+            $this->deleteImages($singleArticle->image);
+
+            $data = $request->imgdata;
+            $newName = rand().".".$request->image->getClientOriginalExtension();
+            $this->createImage($data, $newName);
+        }
+                
+        $article = array(
+            'reseller_id' => '0',
+            'title' => $request->title?:$singleArticle->title,
+            'content' => $request->content?:$request->content,
+            'image' => $newName?:$singleArticle->image,
+            'status' => $request->status?:$request->status,
+            'publish_date' => $request->publish_date?:$singleArticle->publish_date,
+            'updated_by' => '0'
         );
+        $singleArticle->update($article);
+
+        // Save tags
+        if ($request->tags != $articlesTags) {
+            ArticlesTags::where('articles_id', $request->id)->delete(); // Delete all tags
+            foreach ($request->tags as $tag) {
+                $articleTag = array(
+                    'articles_id' => $request->id,
+                    'tags_id' => $tag,
+                    'updated_by' => '0'
+                );
+                ArticlesTags::create($articleTag);
+            }
+        }
         
-        $result = ArticlesTag::articlesTag($tags);
-        
-        if ($result) {
+        // Save tags
+        if ($request->categories_id != $articlesCategories) {
+            ArticlesCategories::where('articles_id', $request->id)->delete(); // Delete all categories
+            foreach ($request->categories_id as $categories) {
+                $articleCategories = array(
+                    'articles_id' => $request->id,
+                    'categories_id' => $categories,
+                    'updated_by' => '0'
+                );
+                ArticlesCategories::create($articleCategories);
+            }
+        }
+
+        return redirect('/news');
+    }
+
+    public function duplicate(Request $request)
+    {
+        $article = Articles::find($request->id);
+        $articlesTags = array_column(array_column($article->tags->toArray(), "pivot"), "tags_id");
+        $articlesCategories = array_column(array_column($article->categories->toArray(), "pivot"), "categories_id");
+
+        $dimention = explode('.', $article->image);
+        $newName = rand().".".$dimention[1];
+        $this->copyImage($article->image, $newName);
+
+        // Save duplicate
+            $duplicateArticle = array(
+                'reseller_id' => '0',
+                'title' => $article->title,
+                'content' => $article->content,
+                'image' => $newName,
+                'status' => '0',
+                'publish_date' => $article->publish_date,
+                'updated_by' => '0'
+            );
+            $duplicateArticle = Articles::create($duplicateArticle);
+            $duplicateArticleId = $duplicateArticle->id;
+            
+            // Save tags
+            foreach ($articlesTags as $tag) {
+                $articleTag = array(
+                    'articles_id' => $duplicateArticleId,
+                    'tags_id' => $tag,
+                    'updated_by' => '0'
+                );
+                ArticlesTags::create($articleTag);
+            }
+
+        // Save tags
+            foreach ($articlesCategories as $categories) {
+                $articleCategories = array(
+                    'articles_id' => $duplicateArticleId,
+                    'categories_id' => $categories,
+                    'updated_by' => '0'
+                );
+                ArticlesCategories::create($articleCategories);
+            }
+
+        return redirect('/news');
+    }
+    
+    public function publish(Request $request)
+    {
+        $article = Articles::find($request->id);
+        $article->update(['status'=> '1']);
+        return redirect('/news');
+    }
+
+    public function unpublish(Request $request)
+    {
+        $article = Articles::find($request->id);
+        $article->update(['status'=> '2']);
+        return redirect('/news');
+    }
+
+    public function delete(Request $request)
+    {
+        $articles = Articles::find($request->id);
+        $this->deleteImages($articles->image);
+        if ($articles->delete()) {
             return redirect('/news');
         } else {
             return view('view::articles.404');
         }
+
     }
     
     /**
-     * Edit function
-     * To load the view only for edit article
-     *
-     * @param [type] $id
-     * @return void
-     */
-    public function edit($id)
-    {
-        $singleArticles = Articles::getSingleArticles($id);
-        $categories = Categories::getAllCategories();
-        $tags = Tags::getAllTags();
-        return view('view::articles.edit', ['singleNews' => $singleArticles, "categories" => $categories, "tags" => $tags]);
-    }
-    
-    /**
-     * Update function
-     * To update the article and related categories and tags and image(actual, cover, thumbnail)
-     *
-     * @param Request $request
-     * @param [type] $id
-     * @return void
-     */
-    public function update(Request $request, $id)
-    {
-        // validate the data
-        $request->validate([
-            "category_id" => "required",
-            "title" => "required",
-            "slug" => "required",
-            "content" => "required",
-            "status" => "required",
-            "image" => "required|image|mimes:jpeg,png,jpg,gif",
-            "date" => "required",
-            "tags" => "required"
-        ]);
-
-        $singleArticles = Articles::getSingleArticles($id);
-        
-        $this->deleteImages($singleArticles->image);
-
-        $data = $request->imgdata;
-        $newName = rand()."_".$request->image->getClientOriginalExtension();
-        $this->imageAction($data, $newName);
-
-        $singleArticles = array(
-            'category_id' => $request['category_id'] ?: $singleArticles['category_id'],
-            'title' => $request['title'] ?: $singleArticles['title'],
-            'slug' => $request['slug'] ?: $singleArticles['slug'],
-            'content' => $request['content'] ?: $singleArticles['content'],
-            'image' => $newName ?: $singleArticles['image'],
-            'status' => $request['status'] ?: $singleArticles['status'],
-            'date' => $request['date'] ?: $singleArticles['date']
-        );
-        
-        $result = Articles::updateArticle($singleArticles, $id);
-        
-        if ($result) {
-            $tags = array(
-                'article_id' => $id,
-                'tag_id' => $request['tags']
-            );
-            
-            $result = ArticlesTag::udateArticlesTag($tags, $id);
-            if ($result) {
-                return redirect('/news');
-            }
-        }
-        
-        return view('view::articles.404');
-    }
-    
-    /**
-     * Delete function
-     * To delete the article and related categories and tags and image(actual, cover, thumbnail)
-     *
-     * @param [type] $id
-     * @return void
-     */
-    public function delete($id)
-    {
-        $singleArticles = Articles::getSingleArticles($id);
-        File::delete('uploads/packages/publications/images/thumbnail/small/'.$singleArticles->image);
-        File::delete('uploads/packages/publications/images/thumbnail/medium/'.$singleArticles->image);
-        File::delete('uploads/packages/publications/images/thumbnail/large/'.$singleArticles->image);
-        File::delete('uploads/packages/publications/images//cover/'.$singleArticles->image);
-        $articles = Articles::deleteArticles($id);
-        $ArticlesTag = ArticlesTag::deleteArticlesTag($id);
-        if ($articles || $ArticlesTag) {
-            return redirect()->back();
-        } else {
-            return view('view::articles.404');
-        }
-    }
-
-    /**
-     * ImageAction fucntion
+     * createImage fucntion
      * To create folders and upload images in those folders
      *
      * @param [type] $imgBlob
      * @param [type] $articleImg
      * @return void
      */
-    public function imageAction($imgBlob, $articleImg)
+    public function createImage($imgBlob, $articleImg)
     {
         $data = $imgBlob;
         list($type, $data) = explode(';', $data);
@@ -225,6 +265,31 @@ class ArticlesController extends BaseController
     }
 
     /**
+     * createImage fucntion
+     * To create folders and upload images in those folders
+     *
+     * @param [type] $imgBlob
+     * @param [type] $articleImg
+     * @return void
+     */
+    public function copyImage($from, $to)
+    {
+        $imageFoldersPath = array(
+            'uploads/packages/publications/images/thumbnail/small/',
+            'uploads/packages/publications/images/thumbnail/medium/',
+            'uploads/packages/publications/images/thumbnail/large/',
+            'uploads/packages/publications/images/cover/'
+        );
+
+        foreach ($imageFoldersPath as $path) {
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            Image::make($path.$from)->save($path.$to);
+        }
+    }
+
+    /**
      * deleteImages function
      * To delete images from all the folders
      *
@@ -240,7 +305,7 @@ class ArticlesController extends BaseController
             '1900_350'             =>  'uploads/packages/publications/images/cover/'
         );
         foreach ($imageFoldersPath as $path) {
-            if (!File::exists($path)) {
+            if (File::exists($path)) {
                 File::delete($path.$imageName);
             }
         }
