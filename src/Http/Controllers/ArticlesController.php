@@ -49,7 +49,7 @@ class ArticlesController extends BaseController
         $tags = Tags::all();
         return view('view::articles.create', [ "categories" => $categories, "tags" => $tags]);
     }
-    
+
     public function edit(Request $request)
     {
         $singleArticle = Articles::find($request->id);
@@ -166,6 +166,22 @@ class ArticlesController extends BaseController
             }
         }
 
+        return redirect('/news');
+    }
+
+    public function bulkAction(Request $request)
+    {
+        $action = $request->action;
+        $articlesids = $request->chk;
+        foreach ($articlesids as $articlesid) {
+            $article = Articles::find($articlesid);
+            if ($action == 'Delete') {
+                $article->delete();
+                $this->deleteImages($article->image);
+            } else {
+                $article->update(['status'=> '2']);
+            }
+        }
         return redirect('/news');
     }
 
