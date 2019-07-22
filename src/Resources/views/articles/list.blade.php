@@ -44,7 +44,7 @@
                 <div class="main-content-prio-row main-content-prio-row1">
                     <div class="left-prio-row">
                         <p class="title">Publications</p>
-                        <p class="subtitle">{{ count($allNews) }} POSTS</p>
+                        <p class="subtitle">{{ count($articles) }} POSTS</p>
                     </div><!--
                  --><div class="right-prio-row">
                         <div class="options-for-checked-checkboxes">
@@ -83,7 +83,7 @@
                                 </svg>  
                             </div><!--
                         --><div class="newpost-button-div">
-                                <a class="waves-effect waves-light newpost-button" href="{{ url("/news/create") }}">+ New post</a>
+                                <a class="waves-effect waves-light newpost-button" href="{{ url("/article/create") }}">+ New post</a>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         </label><!--
                      --><p>Select all</p>
                     </div>
-                    <form method="post" action="{{ url('news/bulk/action') }}" id="bulkaction">
+                    <form method="post" action="{{ url('articles/bulk/action') }}" id="bulkaction">
                         @csrf
                         <table>
                             <thead>
@@ -165,18 +165,18 @@
                             </thead>
                     
                             <tbody>
-                                @foreach ($allNews as $newsKey => $news)
-                                    <tr class={{ (($newsKey%2) == 1)?'even-tr':'' }}>
+                                @foreach ($articles as $articleKey => $article)
+                                    <tr class={{ (($articleKey%2) == 1)?'even-tr':'' }}>
                                         @php
                                             $Status = 'draft';
                                             $background = '#1bb7c2';
                                             $tooltipStatus = 'publish';
-                                            if($news->status == 1){
+                                            if($article->status == 1){
                                                 $Status = 'published';
                                                 $background = '#00dc81';
                                                 $tooltipStatus = 'unpublish';
                                             }
-                                            if($news->status == 2){
+                                            if($article->status == 2){
                                                 $Status = 'unpublished';
                                                 $background = '#ff4411';
                                                 $tooltipStatus = 'publish';
@@ -186,14 +186,14 @@
                                             <div class="left-bar-active-table" style="background-color:{!! $background !!}"></div>
                                             <div class="bottom-bar-active-table" style="background-color:{!! $background !!}"></div>
                                             <label class="prio-checkbox dashboard-checkboxes-table small">
-                                            <input type="checkbox" name="chk[]" value="{{ $news->id }}" class="filled-in" />
+                                            <input type="checkbox" name="chk[]" value="{{ $article->id }}" class="filled-in" />
                                                 <span></span>
                                             </label>
                                         </td>
-                                        <td class="column2"><span class="td-title">Article ID : </span><p>{{ $news->id }}</p></td>
-                                        <td class="column3"><span class="td-title">Title : </span><p>{{ $news->title }}</p></td>
-                                        <td class="column4"><span class="td-title">Date :</span><p>{{ $news->publish_date }}</p></td>
-                                        <td class="column5"><span class="td-title">Type : </span><p>News</p></td>
+                                        <td class="column2"><span class="td-title">Article ID : </span><p>{{ $article->id }}</p></td>
+                                        <td class="column3"><span class="td-title">Title : </span><p>{{ $article->title }}</p></td>
+                                        <td class="column4"><span class="td-title">Date :</span><p>{{ $article->publish_date }}</p></td>
+                                        <td class="column5"><span class="td-title">Type : </span><p>Articles</p></td>
                                         <td class="column6"><span class="td-title">Status : </span><div class="circle circle-{!! $Status !!}"></div><p>{!! ucfirst($Status) !!}</p></td>
                                         <td class="column7">
                                             <div class="inner-column7">
@@ -201,7 +201,7 @@
                                                     <div class="icon1-info">
                                                         <p>Duplicate</p>
                                                     </div>
-                                                    <a href={{ url("/news/duplicate/$news->id") }}>
+                                                    <a href={{ url("/article/duplicate/$article->id") }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="21.5" height="21.5" viewBox="0 0 21.5 21.5">
                                                             <g id="Group_103721" data-name="Group 103721" transform="translate(-220.25 -132.25)">
                                                                 <path id="Path_164" data-name="Path 164" d="M225,150.636a2.679,2.679,0,0,0,2.727,2.727h10.909a2.679,2.679,0,0,0,2.727-2.727V139.727A2.679,2.679,0,0,0,238.636,137H227.727A2.679,2.679,0,0,0,225,139.727Z" transform="translate(-0.364 -0.364)" fill="none" stroke="#bcbcbc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
@@ -216,7 +216,7 @@
                                                     <div class="icon2-info">
                                                         <p>{!! ucfirst($tooltipStatus) !!}</p>
                                                     </div>
-                                                    <a href={{ url("/news/$tooltipStatus/$news->id") }}>
+                                                    <a href={{ url("/article/$tooltipStatus/$article->id") }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20.5" height="20.5" viewBox="0 0 20.5 20.5">
                                                             <g id="Group_103723" data-name="Group 103723" transform="translate(-176.25 -88.25)">
                                                                 <g id="Group_157" data-name="Group 157" transform="translate(177 89)">
@@ -232,7 +232,7 @@
                                                     <div class="icon3-info">
                                                         <p>Delete</p>
                                                     </div>
-                                                    <a href={{ url("/news/delete/$news->id") }}>
+                                                    <a href={{ url("/article/delete/$article->id") }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="21.5" height="21.5" viewBox="0 0 21.5 21.5">
                                                             <g id="Group_103722" data-name="Group 103722" transform="translate(-352.25 -88.25)">
                                                                 <g id="Group_67" data-name="Group 67" transform="translate(353 89)">
@@ -248,7 +248,7 @@
                                                     </a>
                                                 </div><!--
                                             --><div class="edit-button-div">
-                                                    <a href={{ url("/news/edit/$news->id") }} class="waves-effect waves-light edit-button">Edit</a>
+                                                    <a href={{ url("/article/edit/$article->id") }} class="waves-effect waves-light edit-button">Edit</a>
                                                 </div>
                                             </div>
                                         </td>

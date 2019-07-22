@@ -27,7 +27,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{{ url('/news') }}">News</a>
+                                    <a class="nav-link" href="{{ url('/articles') }}">Articles</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
@@ -41,14 +41,14 @@
                 <!--/.Navbar -->
         </section>
         <section class="content">
-            <a href="{{ url('/news') }}" class="hidden-print text-muted" style="margin-left: 40px;">
+            <a href="{{ url('/articles') }}" class="hidden-print text-muted" style="margin-left: 40px;">
                 <i class="fas fa-angle-double-left"></i> Back to all 
                 <span>articles</span>
             </a>
             <div class="row m-t-20">
                 <div class="col-md-8 col-md-offset-2" style="margin: 0 auto;">
                     <!-- Default form box -->
-                        <form class="text-center border border-light p-5" method="post" action="{{ url('/news/save') }}" enctype="multipart/form-data">
+                        <form class="text-center border border-light p-5" method="post" action="{{ url('/article/save') }}" enctype="multipart/form-data">
                             @csrf
                             <p class="h4 mb-4 text-muted">Create article</p>
                         

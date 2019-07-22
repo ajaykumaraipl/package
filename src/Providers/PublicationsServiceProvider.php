@@ -4,7 +4,7 @@ namespace Package\Publication\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class PublisherServiceProvider extends ServiceProvider
+class PublicationsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

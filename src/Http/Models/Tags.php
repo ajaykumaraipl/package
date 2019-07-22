@@ -10,7 +10,7 @@ class Tags extends Model
     // use SoftDeletes;
     
     // Define the table name
-    protected $table = 'tags';
+    protected $table = 'publication_tags';
     protected $primaryKey = 'id';
     protected $fillable = ['reseller_id', 'name', 'description', 'updated_by'];
     // protected $softDelete = true;
@@ -18,6 +18,6 @@ class Tags extends Model
     
     public function articles()
     {
-        return $this->belongsToMany(Articles::class, 'article_tag');
+        return $this->belongsToMany(Articles::class, 'publication_article_tag');
     }
 }

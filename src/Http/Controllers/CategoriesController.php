@@ -19,7 +19,7 @@ class CategoriesController extends BaseController
     public function index(Request $request)
     {
         $allCategories = Categories::all();
-        return view('view::categories.all')->with(['allCategories' => $allCategories]);
+        return view('view::categories.list')->with(['allCategories' => $allCategories]);
     }
     
     /**
@@ -74,7 +74,7 @@ class CategoriesController extends BaseController
         if ($categories->save()) {
             return redirect('/categories');
         } else {
-            return view('view::categories.404');
+            return view('view::errors.404');
         }
     }
 
@@ -106,7 +106,7 @@ class CategoriesController extends BaseController
         if ($singleCategories->update($categories)) {
             return redirect('/categories');
         } else {
-            return view('view::categories.404');
+            return view('view::errors.404');
         }
     }
 
@@ -116,7 +116,7 @@ class CategoriesController extends BaseController
         if ($category->delete()) {
             return redirect('/categories');
         } else {
-            return view('view::categories.404');
+            return view('view::errors.404');
         }
     }
 }
