@@ -6,18 +6,19 @@ Route::get('test', function () {
 
 
 Route::group(['middleware' => 'web'], function () {
-    // News Routing
-    Route::get('news', 'ArticlesController@index');
-    Route::get('news/edit/{id}', 'ArticlesController@edit');
-    Route::get('news/create', 'ArticlesController@create');
-    Route::get('news/delete/{id}', 'ArticlesController@delete');
-    Route::get('news/publish/{id}', 'ArticlesController@publish');
-    Route::get('news/unpublish/{id}', 'ArticlesController@unpublish');
-    Route::get('news/duplicate/{id}', 'ArticlesController@duplicate');
+    // Articles Routing
+    Route::get('articles', 'ArticlesController@index');
+    Route::get('article/edit/{id}', 'ArticlesController@edit');
+    Route::get('article/create', 'ArticlesController@create');
+    Route::get('article/delete/{id}', 'ArticlesController@delete');
+    Route::get('article/publish/{id}', 'ArticlesController@publish');
+    Route::get('article/unpublish/{id}', 'ArticlesController@unpublish');
+    Route::get('article/duplicate/{id}', 'ArticlesController@duplicate');
 
-    // News Post
-    Route::post('news/save', 'ArticlesController@store');
-    Route::post('news/update/{id}', 'ArticlesController@update');
+    // Articles Post
+    Route::post('article/save', 'ArticlesController@store');
+    Route::post('article/update/{id}', 'ArticlesController@update');
+    Route::post('articles/bulk/action', 'ArticlesController@bulkAction');
 
 
     // Categories Routing

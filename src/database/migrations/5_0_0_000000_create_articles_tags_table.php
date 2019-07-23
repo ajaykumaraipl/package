@@ -12,7 +12,7 @@ class CreateArticlesTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles_tags', function (Blueprint $table) {
+        Schema::create('publication_articles_tags', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->integer('articles_id')->unsigned()->index();

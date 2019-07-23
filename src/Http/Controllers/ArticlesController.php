@@ -39,8 +39,8 @@ class ArticlesController extends BaseController
      */
     public function index(Request $request)
     {
-        $article = Articles::all();
-        return view('view::articles.all')->with(['allNews' => $article]);
+        $articles = Articles::all();
+        return view('view::articles.list')->with(['articles' => $articles]);
     }
 
     public function create(Request $request)
@@ -99,7 +99,7 @@ class ArticlesController extends BaseController
         ));
         $tags->save();
         
-        return redirect('/news');
+        return redirect('/articles');
     }
 
     public function update(Request $request)
@@ -166,7 +166,7 @@ class ArticlesController extends BaseController
             }
         }
 
-        return redirect('/news');
+        return redirect('/articles');
     }
 
     public function bulkAction(Request $request)
@@ -182,7 +182,7 @@ class ArticlesController extends BaseController
                 $article->update(['status'=> '2']);
             }
         }
-        return redirect('/news');
+        return redirect('/articles');
     }
 
     public function duplicate(Request $request)
@@ -228,21 +228,21 @@ class ArticlesController extends BaseController
                 ArticlesCategories::create($articleCategories);
             }
 
-        return redirect('/news');
+        return redirect('/articles');
     }
     
     public function publish(Request $request)
     {
         $article = Articles::find($request->id);
         $article->update(['status'=> '1']);
-        return redirect('/news');
+        return redirect('/articles');
     }
 
     public function unpublish(Request $request)
     {
         $article = Articles::find($request->id);
         $article->update(['status'=> '2']);
-        return redirect('/news');
+        return redirect('/articles');
     }
 
     public function delete(Request $request)
@@ -250,7 +250,7 @@ class ArticlesController extends BaseController
         $articles = Articles::find($request->id);
         $this->deleteImages($articles->image);
         if ($articles->delete()) {
-            return redirect('/news');
+            return redirect('/articles');
         } else {
             return view('view::articles.404');
         }

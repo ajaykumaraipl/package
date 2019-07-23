@@ -20,7 +20,7 @@ class TagsController extends BaseController
     public function index(Request $request)
     {
         $tags = Tags::all();
-        return view('view::tags.all')->with(['tags' => $tags]);
+        return view('view::tags.list')->with(['tags' => $tags]);
     }
     
     /**

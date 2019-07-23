@@ -31,7 +31,7 @@ name<!DOCTYPE html>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{{ url('/news') }}">News</a>
+                                    <a class="nav-link" href="{{ url('/articles') }}">Articles</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/categories') }}">Categories</a>
@@ -89,6 +89,5 @@ name<!DOCTYPE html>
                 </div>
             </div>
         </section>
-        {{-- @dd($singleNews); --}}
     </body>
 </html>
