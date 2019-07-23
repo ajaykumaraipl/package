@@ -18,7 +18,7 @@ class CreateArticlesCategoriesTable extends Migration
             $table->integer('articles_id')->unsigned()->index();
             $table->integer('categories_id')->unsigned()->index();
             $table->string('updated_by');
-            $table->foreign('articles_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->foreign('articles_id')->references('id')->on('publication_articles')->onDelete('cascade');
             $table->nullableTimestamps();
             $table->softDeletes();
         });
