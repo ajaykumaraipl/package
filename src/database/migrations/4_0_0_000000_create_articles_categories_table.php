@@ -14,7 +14,7 @@ class CreateArticlesCategoriesTable extends Migration
     {
         Schema::create('publication_articles_categories', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('articles_id')->unsigned()->index();
             $table->integer('categories_id')->unsigned()->index();
             $table->string('updated_by');

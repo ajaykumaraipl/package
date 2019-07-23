@@ -14,7 +14,7 @@ class CreateArticlesTagsTable extends Migration
     {
         Schema::create('publication_articles_tags', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('articles_id')->unsigned()->index();
             $table->integer('tags_id')->unsigned()->index();
             $table->string('updated_by');

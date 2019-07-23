@@ -14,7 +14,7 @@ class CreateTagsTable extends Migration
     {
         Schema::create('publication_tags', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('reseller_id');
             $table->string('name');
             $table->text('description');
