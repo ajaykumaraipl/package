@@ -14,7 +14,7 @@ class PublicationsServiceProvider extends ServiceProvider
     public function register()
     {
         // Publish view costant
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'view');
+        // $this->loadViewsFrom(__DIR__.'/../Resources/views', 'view');
     }
     
     /**
@@ -31,6 +31,10 @@ class PublicationsServiceProvider extends ServiceProvider
                 include __DIR__.'/../Route/web.php';
             },
         );
+
+        $this->publishes([
+            __DIR__.'/../Resources/views' => resource_path('views'),
+        ]);
 
         // register migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

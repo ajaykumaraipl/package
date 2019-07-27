@@ -16,8 +16,8 @@ class ArticlesCategories extends Model
     // protected $softDelete = true;
     public $timestamps = true;
 
-    public function articles()
-    {
-        return $this->belongsToMany(Articles::class, 'publication_articles_categories');
-    }
+    // public function articles()
+    // {
+    //     return $this->belongsToMany(Articles::class, 'publication_articles_categories');
+    // }
 }

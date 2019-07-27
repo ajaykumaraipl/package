@@ -23,6 +23,7 @@ class ArticlesController extends BaseController
 
     public function __construct()
     {
+        \Theme::set('blue');
         $this->imageFoldersPath = array(
             '300_160'   =>  public_path('uploads/packages/publications/images/thumbnail/small/'),
             '460_320'   =>  public_path('uploads/packages/publications/images/thumbnail/medium/'),
@@ -40,14 +41,14 @@ class ArticlesController extends BaseController
     public function index(Request $request)
     {
         $articles = Articles::all();
-        return view('view::articles.list')->with(['articles' => $articles]);
+        return view('articles.list')->with(['articles' => $articles]);
     }
 
     public function create(Request $request)
     {
         $categories = Categories::all();
         $tags = Tags::all();
-        return view('view::articles.create', [ "categories" => $categories, "tags" => $tags]);
+        return view('articles.create', [ "categories" => $categories, "tags" => $tags]);
     }
 
     public function edit(Request $request)
@@ -55,7 +56,7 @@ class ArticlesController extends BaseController
         $singleArticle = Articles::find($request->id);
         $categories = Categories::all();
         $tags = Tags::all();
-        return view('view::articles.edit', [ "singleArticle" => $singleArticle, "categories" => $categories, "tags" => $tags]);
+        return view('articles.edit', [ "singleArticle" => $singleArticle, "categories" => $categories, "tags" => $tags]);
     }
 
     public function store(Request $request)
@@ -65,9 +66,11 @@ class ArticlesController extends BaseController
             "title" => "required",
             "content" => "required",
             "image" => "required|image|mimes:jpeg,png,jpg,gif",
-            "status" => "required",
-            "publish_date" => "required",
+            "publish_date" => "required"
         ]);
+        
+        $categoriesIds = explode(",", $request->categories_id);
+        $tagsIds = explode(",", $request->tags);
 
         $data = $request->imgdata;
         $newName = rand().".".$request->image->getClientOriginalExtension();
@@ -79,25 +82,30 @@ class ArticlesController extends BaseController
             'content' => $request->content,
             'image' => $newName,
             'status' => $request->status,
-            'publish_date' => $request->publish_date,
+            'publish_date' => '2019-07-24',//$request->publish_date,
             'updated_by' => '0'
         );
+
         $article = Articles::create($article);
         $articleId = $article->id;
         
-        $categories = new ArticlesCategories(array(
-            'articles_id' => $articleId,
-            'categories_id' => $request->categories_id,
-            'updated_by' => '0'
-        ));
-        $categories->save();
+        foreach ($categoriesIds as $categories_id) {
+            $categories = new ArticlesCategories(array(
+                'articles_id' => $articleId,
+                'categories_id' => $categories_id,
+                'updated_by' => '0'
+            ));
+            $categories->save();
+        }
 
-        $tags = new ArticlesTags(array(
-            'articles_id' => $articleId,
-            'tags_id' => $request->tags,
-            'updated_by' => '0'
-        ));
-        $tags->save();
+        foreach ($tagsIds as $tag) {
+            $tags = new ArticlesTags(array(
+                'articles_id' => $articleId,
+                'tags_id' => $tag,
+                'updated_by' => '0'
+            ));
+            $tags->save();
+        }
         
         return redirect('/articles');
     }
@@ -252,7 +260,7 @@ class ArticlesController extends BaseController
         if ($articles->delete()) {
             return redirect('/articles');
         } else {
-            return view('view::articles.404');
+            return view('articles.404');
         }
 
     }

@@ -20,7 +20,7 @@ class TagsController extends BaseController
     public function index(Request $request)
     {
         $tags = Tags::all();
-        return view('view::tags.list')->with(['tags' => $tags]);
+        return view('tags.list')->with(['tags' => $tags]);
     }
     
     /**
@@ -31,7 +31,7 @@ class TagsController extends BaseController
      */
     public function create(Request $request)
     {
-        return view('view::tags.create');
+        return view('tags.create');
     }
     
     /**
@@ -43,7 +43,7 @@ class TagsController extends BaseController
     public function edit(Request $request)
     {
         $singleTag = Tags::find($request->id);
-        return view('view::tags.edit')->with(['singleTag' => $singleTag]);
+        return view('tags.edit')->with(['singleTag' => $singleTag]);
     }
 
     /**
@@ -71,7 +71,7 @@ class TagsController extends BaseController
         if ($tags->save()) {
             return redirect('/tags');
         } else {
-            return view('view::tags.404');
+            return view('tags.404');
         }
     }
 
@@ -101,7 +101,7 @@ class TagsController extends BaseController
         if ($singleTag->update($tag)) {
             return redirect('/tags');
         } else {
-            return view('view::tags.404');
+            return view('tags.404');
         }
     }
 
@@ -111,7 +111,7 @@ class TagsController extends BaseController
         if ($tag->delete()) {
             return redirect('/tags');
         } else {
-            return view('view::tags.404');
+            return view('tags.404');
         }
     }
 }

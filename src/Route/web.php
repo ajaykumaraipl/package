@@ -22,6 +22,8 @@ Route::group(['middleware' => 'web'], function () {
 
 
     // Categories Routing
+    Route::post('categories', 'CategoriesController@categories');
+
     Route::get('categories', 'CategoriesController@index');
     Route::get('categories/edit/{id}', 'CategoriesController@edit');
     Route::get('categories/create', 'CategoriesController@create');

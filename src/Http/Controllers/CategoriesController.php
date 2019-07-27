@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 //Models
 use Package\Publication\Models\Categories;
 
+//facafe
+use App\Facades\PrioResponseHandler;
+
 class CategoriesController extends BaseController
 {
     /**
@@ -19,7 +22,7 @@ class CategoriesController extends BaseController
     public function index(Request $request)
     {
         $allCategories = Categories::all();
-        return view('view::categories.list')->with(['allCategories' => $allCategories]);
+        return view('categories.list')->with(['allCategories' => $allCategories]);
     }
     
     /**
@@ -31,7 +34,7 @@ class CategoriesController extends BaseController
     public function create(Request $request)
     {
         $categories = Categories::all();
-        return view('view::categories.create')->with(['categories' => $categories]);
+        return view('categories.create')->with(['categories' => $categories]);
     }
     
     /**
@@ -44,7 +47,7 @@ class CategoriesController extends BaseController
     {
         $allCategories = Categories::all();
         $categories = Categories::find($request->id);
-        return view('view::categories.edit')->with(['singleCategory' => $categories, 'allCategories' => $allCategories]);
+        return view('categories.edit')->with(['singleCategory' => $categories, 'allCategories' => $allCategories]);
     }
 
     /**
@@ -58,24 +61,26 @@ class CategoriesController extends BaseController
     {
         // validate the data
         $request->validate([
+            "parent_id" => "required",
             "name" => "required",
             "description" => "required"
         ]);
 
-        $categories = new Categories(array(
+        $categories = array(
             'reseller_id' => '0',
             'name' => $request->name,
             'description' => $request->description,
             'image' => 'placeholder.png',
             'parent_id' => $request->parent_id?:0,
             'updated_by' => '0'
-        ));
-        
-        if ($categories->save()) {
-            return redirect('/categories');
+        );
+        $category = Categories::create($categories);
+        if ($category->id) {
+            return PrioResponseHandler::sendSuccessResponse(['category' => $category]);
         } else {
-            return view('view::errors.404');
+            return PrioResponseHandler::sendErrorResponse('error');
         }
+        
     }
 
     /**
@@ -106,7 +111,7 @@ class CategoriesController extends BaseController
         if ($singleCategories->update($categories)) {
             return redirect('/categories');
         } else {
-            return view('view::errors.404');
+            return view('errors.404');
         }
     }
 
@@ -116,7 +121,19 @@ class CategoriesController extends BaseController
         if ($category->delete()) {
             return redirect('/categories');
         } else {
-            return view('view::errors.404');
+            return view('errors.404');
+        }
+    }
+
+    public function categories(Request $request)
+    {
+        $categories = Categories::all();
+        $response['categoryHtml'] = view('categories.categoryoptions', ['categories' => $categories])->render();
+        $response['categoryCreateHtml'] = view('categories.create', ['categories' => $categories])->render();
+        if (!empty($categories)) {
+            return PrioResponseHandler::sendSuccessResponse($response);
+        } else {
+            return PrioResponseHandler::sendErrorResponse('error');
         }
     }
 }
